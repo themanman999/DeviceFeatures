@@ -275,10 +275,10 @@
          } // end of Storage Quotas
          
          function readBatteryLevel() { // Bluetooth
-         var $Bluetooth = document.getElementById('Bluetooth');
+         var Bluetooth = document.getElementById('Bluetooth');
          
          if (!('bluetooth' in navigator)) {
-         $Bluetooth.innerText = 'Bluetooth API not supported.';
+         Bluetooth.innerText = 'Bluetooth API not supported.';
          return;
          }
          
@@ -300,10 +300,10 @@
          return characteristic.readValue();
          })
          .then(function (value) {
-         $Bluetooth.innerHTML = 'Battery percentage is <b>' + value.getUint8(0) + '</b>.';
+         Bluetooth.innerHTML = 'Battery percentage is <b>' + value.getUint8(0) + '</b>.';
          })
          .catch(function (error) {
-         $Bluetooth.innerText = error;
+         Bluetooth.innerText = error;
          });
          } // end of Bluetooth
       </script>
