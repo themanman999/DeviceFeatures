@@ -11,6 +11,7 @@
 	function vibratePattern() {
 	  navigator.vibrate([100, 200, 200, 200, 500]);
 	} // Vibration 
+	document.getElementById('result').innerHTML = navigator.deviceMemory || 'unknown' //Device Memory
 	</script>
 </head>
 <body>
@@ -107,7 +108,6 @@ Your device memory is ~<b id="result">unknown</b> GiB.
 	  });
 	} // end of Battery Status
 
-	document.getElementById('result').innerHTML = navigator.deviceMemory || 'unknown' //Device Memory
 </script>
 </body>
 </html>
