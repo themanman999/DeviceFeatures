@@ -1,137 +1,182 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Device Features</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<script type="text/javascript">
-	function vibrateSimple() { // Vibration
-	  	navigator.vibrate(200);
-	}
-
-	function vibratePattern() {
-	  navigator.vibrate([100, 200, 200, 200, 500]);
-	} // Vibration 
-	</script>
-</head>
-<body>
-<p>Turn the network connection on/off to see the changes.</p>
-<p>Initial connection state was <b id="status">unknown</b>.</p>
-<div id="networkState"></div>
-
-<p>Current theoretical network type is <b id="networkType">not available</b>.</p>
-<p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
-<p>Current max downlink speed is <b id="downlinkMax">not available</b>.
-
-<p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
-<div id="BatteryStatus"></div>
-
-<button class="btn btn-default" onclick="vibrateSimple()">Vibrate for 200 ms</button>
-<button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
-
-Your device memory is ~<b id="result">unknown</b> GiB.
-
-<button class="btn btn-default" id="askButton">Ask for location</button>
-<div id="Geolocation"></div>
-
-<script type="text/javascript">
-	document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline'; // network state
-
-	var networkState = document.getElementById('networkState');
-
-	function handleStateChange() {
-		var timeBadge = new Date().toTimeString().split(' ')[0];
-		var newState = document.createElement('p');
-		var state = navigator.onLine ? 'online' : 'offline';
-		newState.innerHTML = '<span class="badge">' + timeBadge + '</span> Connection state changed to <b>' + state + '</b>.';
-		networkState.appendChild(newState);
-	}
-
-	window.addEventListener('online', handleStateChange);
-	window.addEventListener('offline', handleStateChange); // end of network state 
-
-	function getConnection() { // Network Type & Speed
-	  return navigator.connection || navigator.mozConnection ||
-	    navigator.webkitConnection || navigator.msConnection;
-	}
-
-	function updateNetworkInfo(info) {
-	  document.getElementById('networkType').innerHTML = info.type;
-	  document.getElementById('effectiveNetworkType').innerHTML = info.effectiveType;
-	  document.getElementById('downlinkMax').innerHTML = info.downlinkMax;
-	}
-
-	var info = getConnection();
-	if (info) {
-	  info.addEventListener('change', updateNetworkInfo);
-	  updateNetworkInfo(info);
-	} // end of Network Type & Speed
-
-	if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)) { // Battery Status
-	  var BatteryStatus = document.getElementById('BatteryStatus');
-
-	  function handleChange(change) {
-	    var timeBadge = new Date().toTimeString().split(' ')[0];
-	    var newState = document.createElement('p');
-	    newState.innerHTML = '<span class="badge">' + timeBadge + '</span> ' + change + '.';
-	    BatteryStatus.appendChild(newState);
-	  }
-	  
-	  function onChargingChange() {
-	    handleChange('Battery charging changed to <b>' + (this.charging ? 'charging' : 'discharging') + '</b>')
-	  }
-	  function onChargingTimeChange() {
-	    handleChange('Battery charging time changed to <b>' + this.chargingTime + ' s</b>');
-	  }
-	  function onDischargingTimeChange() {
-	    handleChange('Battery discharging time changed to <b>' + this.dischargingTime + ' s</b>');
-	  }
-	  function onLevelChange() {
-	    handleChange('Battery level changed to <b>' + this.level + '</b>');
-	  }
-
-	  var batteryPromise;
-	  
-	  if ('getBattery' in navigator) {
-	    batteryPromise = navigator.getBattery();
-	  } else {
-	    batteryPromise = Promise.resolve(navigator.battery);
-	  }
-	  
-	  batteryPromise.then(function (battery) {
-	    document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging';
-	    document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s';
-	    document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s';
-	    document.getElementById('level').innerHTML = battery.level;
-	    
-	    battery.addEventListener('chargingchange', onChargingChange);
-	    battery.addEventListener('chargingtimechange', onChargingTimeChange);
-	    battery.addEventListener('dischargingtimechange', onDischargingTimeChange);
-	    battery.addEventListener('levelchange', onLevelChange);
-	  });
-	} // end of Battery Status
-
-	document.getElementById('result').innerHTML = navigator.deviceMemory || 'unknown' //Device Memory
-
-	var Geolocation = document.getElementById('Geolocation'); // Geolocation
-	var watchId;
-
-	function appendLocation(location, verb) {
-	  verb = verb || 'updated';
-	  var newLocation = document.createElement('p');
-	  newLocation.innerHTML = 'Location ' + verb + ': <a href="https://maps.google.com/maps?&z=15&q=' + location.coords.latitude + '+' + location.coords.longitude + '&ll=' + location.coords.latitude + '+' + location.coords.longitude + '" target="_blank">' + location.coords.latitude + ', ' + location.coords.longitude + '</a>';
-	  Geolocation.appendChild(newLocation);
-	}
-
-	if ('geolocation' in navigator) {
-	  document.getElementById('askButton').addEventListener('click', function () {
-	    navigator.geolocation.getCurrentPosition(function (location) {
-	      appendLocation(location, 'fetched');
-	    });
-	    watchId = navigator.geolocation.watchPosition(appendLocation);
-	  });
-	} else {
-	  Geolocation.innerText = 'Geolocation API not supported.';
-	} // end of Geolocation
-</script>
-</body>
+   <head>
+      <title>Device Features</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script type="text/javascript">
+         function vibrateSimple() { // Vibration
+           	navigator.vibrate(200);
+         }
+         
+         function vibratePattern() {
+           navigator.vibrate([100, 200, 200, 200, 500]);
+         } // Vibration 
+      </script>
+      <style type="text/css">
+         .container {
+         perspective: 300;
+         -webkit-perspective: 300;
+         }
+         #imgLogo {
+         width: 275px;
+         margin-left: auto;
+         margin-right: auto;
+         display: block;
+         padding: 15px;
+         }
+      </style>
+   </head>
+   <body>
+      <p>Turn the network connection on/off to see the changes.</p>
+      <p>Initial connection state was <b id="status">unknown</b>.</p>
+      <div id="networkState"></div>
+      <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
+      <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
+      <p>Current max downlink speed is <b id="downlinkMax">not available</b>.
+      <p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
+      <div id="BatteryStatus"></div>
+      <button class="btn btn-default" onclick="vibrateSimple()">Vibrate for 200 ms</button>
+      <button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
+      Your device memory is ~<b id="result">unknown</b> GiB.
+      <button class="btn btn-default" id="askButton">Ask for location</button>
+      <div id="Geolocation"></div>
+      <table class="table table-striped table-bordered">
+         <tr>
+            <td>Tilt Left/Right [gamma]</td>
+            <td id="doTiltLR"></td>
+         </tr>
+         <tr>
+            <td>Tilt Front/Back [beta]</td>
+            <td id="doTiltFB"></td>
+         </tr>
+         <tr>
+            <td>Direction [alpha]</td>
+            <td id="doDirection"></td>
+         </tr>
+      </table>
+      <div class="container" id="logoContainer">
+         <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" id="imgLogo">
+      </div>
+      <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>
+      <script type="text/javascript">
+         document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline'; // network state
+         
+         var networkState = document.getElementById('networkState');
+         
+         function handleStateChange() {
+         	var timeBadge = new Date().toTimeString().split(' ')[0];
+         	var newState = document.createElement('p');
+         	var state = navigator.onLine ? 'online' : 'offline';
+         	newState.innerHTML = '<span class="badge">' + timeBadge + '</span> Connection state changed to <b>' + state + '</b>.';
+         	networkState.appendChild(newState);
+         }
+         
+         window.addEventListener('online', handleStateChange);
+         window.addEventListener('offline', handleStateChange); // end of network state 
+         
+         function getConnection() { // Network Type & Speed
+           return navigator.connection || navigator.mozConnection ||
+             navigator.webkitConnection || navigator.msConnection;
+         }
+         
+         function updateNetworkInfo(info) {
+           document.getElementById('networkType').innerHTML = info.type;
+           document.getElementById('effectiveNetworkType').innerHTML = info.effectiveType;
+           document.getElementById('downlinkMax').innerHTML = info.downlinkMax;
+         }
+         
+         var info = getConnection();
+         if (info) {
+           info.addEventListener('change', updateNetworkInfo);
+           updateNetworkInfo(info);
+         } // end of Network Type & Speed
+         
+         if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)) { // Battery Status
+           var BatteryStatus = document.getElementById('BatteryStatus');
+         
+           function handleChange(change) {
+             var timeBadge = new Date().toTimeString().split(' ')[0];
+             var newState = document.createElement('p');
+             newState.innerHTML = '<span class="badge">' + timeBadge + '</span> ' + change + '.';
+             BatteryStatus.appendChild(newState);
+           }
+           
+           function onChargingChange() {
+             handleChange('Battery charging changed to <b>' + (this.charging ? 'charging' : 'discharging') + '</b>')
+           }
+           function onChargingTimeChange() {
+             handleChange('Battery charging time changed to <b>' + this.chargingTime + ' s</b>');
+           }
+           function onDischargingTimeChange() {
+             handleChange('Battery discharging time changed to <b>' + this.dischargingTime + ' s</b>');
+           }
+           function onLevelChange() {
+             handleChange('Battery level changed to <b>' + this.level + '</b>');
+           }
+         
+           var batteryPromise;
+           
+           if ('getBattery' in navigator) {
+             batteryPromise = navigator.getBattery();
+           } else {
+             batteryPromise = Promise.resolve(navigator.battery);
+           }
+           
+           batteryPromise.then(function (battery) {
+             document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging';
+             document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s';
+             document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s';
+             document.getElementById('level').innerHTML = battery.level;
+             
+             battery.addEventListener('chargingchange', onChargingChange);
+             battery.addEventListener('chargingtimechange', onChargingTimeChange);
+             battery.addEventListener('dischargingtimechange', onDischargingTimeChange);
+             battery.addEventListener('levelchange', onLevelChange);
+           });
+         } // end of Battery Status
+         
+         document.getElementById('result').innerHTML = navigator.deviceMemory || 'unknown' //Device Memory
+         
+         var Geolocation = document.getElementById('Geolocation'); // Geolocation
+         var watchId;
+         
+         function appendLocation(location, verb) {
+           verb = verb || 'updated';
+           var newLocation = document.createElement('p');
+           newLocation.innerHTML = 'Location ' + verb + ': <a href="https://maps.google.com/maps?&z=15&q=' + location.coords.latitude + '+' + location.coords.longitude + '&ll=' + location.coords.latitude + '+' + location.coords.longitude + '" target="_blank">' + location.coords.latitude + ', ' + location.coords.longitude + '</a>';
+           Geolocation.appendChild(newLocation);
+         }
+         
+         if ('geolocation' in navigator) {
+           document.getElementById('askButton').addEventListener('click', function () {
+             navigator.geolocation.getCurrentPosition(function (location) {
+               appendLocation(location, 'fetched');
+             });
+             watchId = navigator.geolocation.watchPosition(appendLocation);
+           });
+         } else {
+           Geolocation.innerText = 'Geolocation API not supported.';
+         } // end of Geolocation
+         if ('DeviceOrientationEvent' in window) { // Device Position
+         window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+         } else {
+         document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.';
+         }
+         
+         function deviceOrientationHandler (eventData) {
+         var tiltLR = eventData.gamma;
+         var tiltFB = eventData.beta;
+         var dir = eventData.alpha;
+         
+         document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+         document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
+         document.getElementById("doDirection").innerHTML = Math.round(dir);
+         
+         var logo = document.getElementById("imgLogo");
+         logo.style.webkitTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
+         logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
+         logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
+         } // end of Device Position
+      </script>
+   </body>
 </html>
