@@ -11,12 +11,33 @@
 	function vibratePattern() {
 	  navigator.vibrate([100, 200, 200, 200, 500]);
 	} // Vibration 
+
+	var Geolocation = document.getElementById('Geolocation'); // Geolocation
+	var watchId;
+
+	function appendLocation(location, verb) {
+	  verb = verb || 'updated';
+	  var newLocation = document.createElement('p');
+	  newLocation.innerHTML = 'Location ' + verb + ': <a href="https://maps.google.com/maps?&z=15&q=' + location.coords.latitude + '+' + location.coords.longitude + '&ll=' + location.coords.latitude + '+' + location.coords.longitude + '" target="_blank">' + location.coords.latitude + ', ' + location.coords.longitude + '</a>';
+	  Geolocation.appendChild(newLocation);
+	}
+
+	if ('geolocation' in navigator) {
+	  document.getElementById('askButton').addEventListener('click', function () {
+	    navigator.geolocation.getCurrentPosition(function (location) {
+	      appendLocation(location, 'fetched');
+	    });
+	    watchId = navigator.geolocation.watchPosition(appendLocation);
+	  });
+	} else {
+	  Geolocation.innerText = 'Geolocation API not supported.';
+	} // end of Geolocation
 	</script>
 </head>
 <body>
 <p>Turn the network connection on/off to see the changes.</p>
 <p>Initial connection state was <b id="status">unknown</b>.</p>
-<div id="target"></div>
+<div id="networkState"></div>
 
 <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
 <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
@@ -30,17 +51,20 @@
 
 Your device memory is ~<b id="result">unknown</b> GiB.
 
+<button class="btn btn-default" id="askButton">Ask for location</button>
+<div id="Geolocation"></div>
+
 <script type="text/javascript">
 	document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline'; // network state
 
-	var target = document.getElementById('target');
+	var networkState = document.getElementById('networkState');
 
 	function handleStateChange() {
 		var timeBadge = new Date().toTimeString().split(' ')[0];
 		var newState = document.createElement('p');
 		var state = navigator.onLine ? 'online' : 'offline';
 		newState.innerHTML = '<span class="badge">' + timeBadge + '</span> Connection state changed to <b>' + state + '</b>.';
-		target.appendChild(newState);
+		networkState.appendChild(newState);
 	}
 
 	window.addEventListener('online', handleStateChange);
