@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Device Features</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script type="text/javascript">
+		function vibrateSimple() {
+	  navigator.vibrate(200);
+	}
 
+	function vibratePattern() {
+	  navigator.vibrate([100, 200, 200, 200, 500]);
+	}
+	</script>
 </head>
 <body>
 <p>Turn the network connection on/off to see the changes.</p>
-
 <p>Initial connection state was <b id="status">unknown</b>.</p>
-
 <div id="target"></div>
 
 <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
 <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
 <p>Current max downlink speed is <b id="downlinkMax">not available</b>.
+
+<button class="btn btn-default" onclick="vibrateSimple()">Vibrate for 200 ms</button>
+<button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
+
 <script type="text/javascript">
-	document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline';
+	document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline'; // network state
 
 	var target = document.getElementById('target');
 
@@ -29,9 +39,8 @@
 	}
 
 	window.addEventListener('online', handleStateChange);
-	window.addEventListener('offline', handleStateChange);
-</script>
-<script type="text/javascript">
+	window.addEventListener('offline', handleStateChange); // end of network state 
+
 	function getConnection() {
 	  return navigator.connection || navigator.mozConnection ||
 	    navigator.webkitConnection || navigator.msConnection;
