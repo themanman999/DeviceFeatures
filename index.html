@@ -10,7 +10,7 @@
 
 	function vibratePattern() {
 	  navigator.vibrate([100, 200, 200, 200, 500]);
-	} // Vibration
+	} // Vibration 
 	</script>
 </head>
 <body>
@@ -27,6 +27,8 @@
 
 <button class="btn btn-default" onclick="vibrateSimple()">Vibrate for 200 ms</button>
 <button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
+
+Your device memory is ~<b id="result">unknown</b> GiB.
 
 <script type="text/javascript">
 	document.getElementById('status').innerHTML = navigator.onLine ? 'online' : 'offline'; // network state
@@ -104,6 +106,8 @@
 	    battery.addEventListener('levelchange', onLevelChange);
 	  });
 	} // end of Battery Status
+
+	document.getElementById('result').innerHTML = navigator.deviceMemory || 'unknown' //Device Memory
 </script>
 </body>
 </html>
