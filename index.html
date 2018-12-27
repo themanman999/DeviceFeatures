@@ -19,9 +19,11 @@
          #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
          .btn { width:300px;height:50px; border-radius:5px;}
          .battery{line-height: 25px;}
+         #DeviceMotion > div{display:-webkit-box;}
+         #DeviceMotion > div > div{width:50%;}
          @media screen and (max-width:600px){
          .btn{ width:100% !important; margin-bottom: 10px;}
-         p{width: auto; padding: 10px 5px;}
+         p{width: auto; height: auto; padding: 10px 5px;}
          }
       </style>
    </head>
@@ -47,7 +49,7 @@
       <button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
       <button class="btn btn-default" id="askButton">Ask for location</button>
       <div id="Geolocation"></div>
-      <div class="table table-striped table-bordered">
+      <div id="DeviceMotion">
          <div>
             <div>Tilt Left/Right [gamma]</div>
             <div id="doTiltLR"></div>
