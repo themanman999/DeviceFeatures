@@ -13,24 +13,27 @@
          } // Vibration 
       </script>
       <style type="text/css">
+        body{margin: 0 auto;}
+        p{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; padding: 5px; text-align: center;}
          .container { perspective:300; -webkit-perspective:300;}
          #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
          .btn { width:300px;height:50px; border-radius:5px;}
+         .battery{line-height: 25px;}
          @media screen and (max-width:600px){
-         .btn{ width:100% !important;}
+         .btn{ width:100% !important; margin-bottom: 10px;}
+         p{width: auto; padding: 10px 5px;}
          }
       </style>
    </head>
    <body>
       <p>Initial connection state was <b id="status">unknown</b>.</p>
-      <br>
       <div id="networkState"></div>
       <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
       <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
       <p>Current max downlink speed is <b id="downlinkMax">not available</b>.
-      <p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
+      <p class="battery">Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
       <div id="BatteryStatus"></div>
-      Your device memory is ~<b id="result">unknown</b> GiB.
+      <p>Your device memory is ~<b id="result">unknown</b> GiB.</p>
       <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
       <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
       <p>Estimated usage is <b id="percent">unknown</b>%.</p>
@@ -44,40 +47,40 @@
       <button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
       <button class="btn btn-default" id="askButton">Ask for location</button>
       <div id="Geolocation"></div>
-      <table class="table table-striped table-bordered">
-         <tr>
-            <td>Tilt Left/Right [gamma]</td>
-            <td id="doTiltLR"></td>
-         </tr>
-         <tr>
-            <td>Tilt Front/Back [beta]</td>
-            <td id="doTiltFB"></td>
-         </tr>
-         <tr>
-            <td>Direction [alpha]</td>
-            <td id="doDirection"></td>
-         </tr>
-         <tr>
-            <td>API used</td>
-            <td id="moApi"></td>
-         </tr>
-         <tr>
-            <td>linear acceleration (excl. gravity)</td>
-            <td id="moAccel"></td>
-         </tr>
-         <tr>
-            <td>acceleration incl. gravity</td>
-            <td id="moAccelGrav"></td>
-         </tr>
-         <tr>
-            <td>rotation rate</td>
-            <td id="moRotation"></td>
-         </tr>
-         <tr>
-            <td>interval (ms)</td>
-            <td id="moInterval"></td>
-         </tr>
-      </table>
+      <div class="table table-striped table-bordered">
+         <div>
+            <div>Tilt Left/Right [gamma]</div>
+            <div id="doTiltLR"></div>
+         </div>
+         <div>
+            <div>Tilt Front/Back [beta]</div>
+            <div id="doTiltFB"></div>
+         </div>
+         <div>
+            <div>Direction [alpha]</div>
+            <div id="doDirection"></div>
+         </div>
+         <div>
+            <div>API used</div>
+            <div id="moApi"></div>
+         </div>
+         <div>
+            <div>linear acceleration (excl. gravity)</div>
+            <div id="moAccel"></div>
+         </div>
+         <div>
+            <div>acceleration incl. gravity</div>
+            <div id="moAccelGrav"></div>
+         </div>
+         <div>
+            <div>rotation rate</div>
+            <div id="moRotation"></div>
+         </div>
+         <div>
+            <div>interval (ms)</div>
+            <div id="moInterval"></div>
+         </div>
+      </div>
       <div class="container" id="logoContainer">
          <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" id="imgLogo">
       </div>
