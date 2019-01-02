@@ -27,7 +27,7 @@ html
 		script(type='text/javascript' src='vibration.js')
 		link(ref='stylesheet', tyle='text/css', href='style.css')
 	body
-		+pTag('Initial connectio state was','status', 0)
+		+pTag('Initial connectio state was ','status', 0)
 		#networkState
 		+pTag('Current theoretical network type is ','networkType', 1)
 		+pTag('Current effective network type is ','effectiveNetworkType', 1)
@@ -42,18 +42,18 @@ html
 			b#level unknown
 			|.
 		#BatteryStatus
-		p Your device memory is ~
+		p Your device memory is 
 			b#result unknown
 			|  Gib.
 		p Estimated storage usage is 
 			b#usage unknown
-			| bytes.
+			|  bytes.
 		p Estimated storage quota is 
 			b#quota unknown
-			| bytes.
+			|  bytes.
 		p Estimated usage is 
 			b#percent unknown
-			| %.
+			|  %.
 		.btn(onclick='vibrateSimple()') Vibrate for 200 ms
 		.btn(onclick='vibratePattern()') Vibrate with pattern
 		.btn#askButton Ask for location
@@ -65,11 +65,11 @@ html
 			small Demo from 
 				a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank') HTML5 Rocks
 				|  article.
-		script(type='text/javascript' src='networkState.js')
-		script(type='text/javascript' src='networkSpeed.js')
-		script(type='text/javascript' src='batteryStatus.js')
-		script(type='text/javascript' src='deviceMemory.js')
-		script(type='text/javascript' src='geolocation.js')deviceMotion.js
-		script(type='text/javascript' src='devicePosition.js')
-		script(type='text/javascript' src='deviceMotion.js')
-		script(type='text/javascript' src='storageQuotas.js')
+		script(type='text/javascript' src='./networkState.js')
+		script(type='text/javascript' src='./networkSpeed.js')
+		script(type='text/javascript' src='./batteryStatus.js')
+		script(type='text/javascript' src='./deviceMemory.js')
+		script(type='text/javascript' src='./geolocation.js')
+		script(type='text/javascript' src='./devicePosition.js')
+		script(type='text/javascript' src='./deviceMotion.js')
+		script(type='text/javascript' src='./storageQuotas.js')
