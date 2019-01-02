@@ -29,6 +29,19 @@ p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-h
     <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
     <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
     <p>Estimated usage is <b id="percent">unknown</b> %.</p>
+    <p>
+      <label>Engine</label>
+    </p>
+    <div class="btn-group" id="selectEngine" role="group">
+      <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
+      <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
+    </div>
+    <p>
+      <label for="value">Value for<code>myKey</code>
+        <input class="form-control" id="value" type="text">
+      </label>
+    </p>
+    <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
     <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
     <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
     <div class="btn" id="askButton">Ask for location</div>
@@ -77,5 +90,6 @@ p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-h
     <script type="text/javascript" src="./devicePosition.js"></script>
     <script type="text/javascript" src="./deviceMotion.js"></script>
     <script type="text/javascript" src="./storageQuotas.js"></script>
+    <script type="text/javascript" src="./offlineStorage.js"></script>
   </body>
 </html>
