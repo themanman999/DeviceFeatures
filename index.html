@@ -4,7 +4,18 @@
     <title>Device Fearture</title>
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
     <script type="text/javascript" src="./vibration.js"></script>
-    <link ref="stylesheet" tyle="text/css" href="./style.css">
+    <style>body{margin: 0 auto;}
+p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-height: 50px; margin: 10px auto; padding: 5px; text-align: center;}
+ .container { perspective:300; -webkit-perspective:300;}
+ #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
+ .btn {background: #ccc; box-shadow: 2px 2px;}
+ .battery{line-height: 25px;}
+ #DeviceMotion > div{display:-webkit-box;}
+ #DeviceMotion > div > div{width:50%;}
+ @media screen and (max-width:600px){
+  p, .btn{width: auto; height: auto; margin:15px; padding: 10px 5px;}
+ }
+    </style>
   </head>
   <body>
     <p>Initial connectio state was <b id="status">unknown</b>.</p>
