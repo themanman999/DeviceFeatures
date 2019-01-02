@@ -25,7 +25,8 @@ html
 		title Device Fearture
 		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
 		script(type='text/javascript' src='./vibration.js')
-		link(ref='stylesheet', tyle='text/css', href='./style.css')
+		style
+			include style.css
 	body
 		+pTag('Initial connectio state was ','status', 0)
 		#networkState
