@@ -55,6 +55,18 @@ html
 		p Estimated usage is 
 			b#percent unknown
 			|  %.
+		p
+			label Engine
+		.btn-group#selectEngine(role='group')
+			button.btn.btn-default(type='button', data-engine='localStorage') Persistent Storage
+			button.btn.btn-default(type='button', data-engine='sessionStorage') Per-Session Storage
+		p
+			label(for='value') Value for
+				code myKey
+				input.form-control#value(type='text')
+		p Open the example in another tab and change the value there to see the synchronization via 
+			code storage
+			|  event.
 		.btn(onclick='vibrateSimple()') Vibrate for 200 ms
 		.btn(onclick='vibratePattern()') Vibrate with pattern
 		.btn#askButton Ask for location
@@ -74,3 +86,4 @@ html
 		script(type='text/javascript' src='./devicePosition.js')
 		script(type='text/javascript' src='./deviceMotion.js')
 		script(type='text/javascript' src='./storageQuotas.js')
+		script(type='text/javascript' src='./offlineStorage.js')
