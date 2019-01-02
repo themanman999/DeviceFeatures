@@ -1,75 +1,70 @@
--
-	var deviceArray = [
-		['Tilt Left/Right [gamma]','doTiltLR'],
-		['Tilt Front/Back [beta]','doTiltFB'],
-		['Direction [alpha]','doDirection'],
-		['API used','moApi'],
-		['linear acceleration (excl. gravity)','moAccel'],
-		['acceleration incl. gravity','moAccelGrav'],
-		['rotation rate','moRotation'],
-		['interval (ms)','moInterval']
-	]
-mixin pTag(string, idName, isUnknown)
-	p= string
-		b(id=idName)= isUnknown===0 ? 'unknown' : 'not available'
-		|.
-mixin deviceMotion
-	#DeviceMotion
-		each item, i in deviceArray
-			div
-				div= deviceArray[i][0]
-				div(id=deviceArray[i][1])
-doctype
-html
-	head
-		title Device Fearture
-		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
-		script(type='text/javascript' src='vibration.js')
-		link(ref='stylesheet', tyle='text/css', href='style.css')
-	body
-		+pTag('Initial connectio state was','status', 0)
-		#networkState
-		+pTag('Current theoretical network type is ','networkType', 1)
-		+pTag('Current effective network type is ','effectiveNetworkType', 1)
-		+pTag('Current max downlink speed is ','downlinkMax', 0)
-		p.battery Initial battery status was 
-			b#charging unknown
-			|, charging time 
-			b#chargingTime unknown
-			|, discharging time  
-			b#dischargingTime unknown
-			|, level
-			b#level unknown
-			|.
-		#BatteryStatus
-		p Your device memory is ~
-			b#result unknown
-			|  Gib.
-		p Estimated storage usage is 
-			b#usage unknown
-			| bytes.
-		p Estimated storage quota is 
-			b#quota unknown
-			| bytes.
-		p Estimated usage is 
-			b#percent unknown
-			| %.
-		.btn(onclick='vibrateSimple()') Vibrate for 200 ms
-		.btn(onclick='vibratePattern()') Vibrate with pattern
-		.btn#askButton Ask for location
-		#geolocation
-		+deviceMotion
-		.container#logoContainer
-			img#imglogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png')
-		p
-			small Demo from 
-				a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank') HTML5 Rocks
-				|  article.
-		script(type='text/javascript' src='./networkState.js')
-		script(type='text/javascript' src='./networkSpeed.js')
-		script(type='text/javascript' src='./batteryStatus.js')
-		script(type='text/javascript' src='./deviceMemory.js')
-		script(type='text/javascript' src='./geolocation.js')
-		script(type='text/javascript' src='./devicePosition.js')
-		script(type='text/javascript' src='./deviceMotion.js')
-		script(type='text/javascript' src='./storageQuotas.js')
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Fearture</title>
+    <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
+    <script type="text/javascript" src="vibration.js"></script>
+    <link ref="stylesheet" tyle="text/css" href="style.css">
+  </head>
+  <body>
+    <p>Initial connectio state was<b id="status">unknown</b>.</p>
+    <div id="networkState"></div>
+    <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
+    <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
+    <p>Current max downlink speed is <b id="downlinkMax">unknown</b>.</p>
+    <p class="battery">Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time  <b id="dischargingTime">unknown</b>, level<b id="level">unknown</b>.</p>
+    <div id="BatteryStatus"></div>
+    <p>Your device memory is ~<b id="result">unknown</b> Gib.</p>
+    <p>Estimated storage usage is <b id="usage">unknown</b>bytes.</p>
+    <p>Estimated storage quota is <b id="quota">unknown</b>bytes.</p>
+    <p>Estimated usage is <b id="percent">unknown</b>%.</p>
+    <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
+    <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
+    <div class="btn" id="askButton">Ask for location</div>
+    <div id="geolocation"></div>
+    <div id="DeviceMotion">
+      <div>
+        <div>Tilt Left/Right [gamma]</div>
+        <div id="doTiltLR"></div>
+      </div>
+      <div>
+        <div>Tilt Front/Back [beta]</div>
+        <div id="doTiltFB"></div>
+      </div>
+      <div>
+        <div>Direction [alpha]</div>
+        <div id="doDirection"></div>
+      </div>
+      <div>
+        <div>API used</div>
+        <div id="moApi"></div>
+      </div>
+      <div>
+        <div>linear acceleration (excl. gravity)</div>
+        <div id="moAccel"></div>
+      </div>
+      <div>
+        <div>acceleration incl. gravity</div>
+        <div id="moAccelGrav"></div>
+      </div>
+      <div>
+        <div>rotation rate</div>
+        <div id="moRotation"></div>
+      </div>
+      <div>
+        <div>interval (ms)</div>
+        <div id="moInterval"></div>
+      </div>
+    </div>
+    <div class="container" id="logoContainer"><img id="imglogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png"></div>
+    <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>
+    <script type="text/javascript" src="./networkState.js"></script>
+    <script type="text/javascript" src="./networkSpeed.js"></script>
+    <script type="text/javascript" src="./batteryStatus.js"></script>
+    <script type="text/javascript" src="./deviceMemory.js"></script>
+    <script type="text/javascript" src="./geolocation.js"></script>
+    <script type="text/javascript" src="./devicePosition.js"></script>
+    <script type="text/javascript" src="./deviceMotion.js"></script>
+    <script type="text/javascript" src="./storageQuotas.js"></script>
+  </body>
+</html>
