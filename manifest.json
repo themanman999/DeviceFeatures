@@ -1,10 +1,12 @@
 {
   "name": "DeviceFeatures",
   "short_name": "DeviceFeatures",
-  "lang": "zh-TW",
+  "description":"Test Device Features",
+  "lang": "en-GB",
   "start_url": "https://themanman999.github.io/DeviceFeatures/",
   "display": "standalone",
   "theme_color": "#ccc",
+  "background_color": "#ccc",
   "icons": [
     {
       "src": "icons/icon_16.png",
