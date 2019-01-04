@@ -24,3 +24,7 @@ p,.btn{line-height: 50px;}
 	#DeviceMotion > div > div{width:50%;}
 	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
+@media screen and (max-width:480px){
+	#officeStorage .btn-group button{width:40% !important; font-size:small !important;}	
+	#vibration div{width:36% !important; font-size:small !important;}
+}
