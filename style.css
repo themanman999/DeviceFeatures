@@ -16,4 +16,5 @@ p,.btn{line-height: 50px;  text-align: center;}
 @media screen and (max-width:600px){
 	p, .btn,#officeStorage,#DeviceMotion{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#officeStorage .btn-group button{width:41% !important;}
+	#logoContainer img{width:200px !important;}
 }
