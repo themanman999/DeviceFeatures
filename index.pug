@@ -26,13 +26,13 @@ mixin deviceMotion
 				div= deviceArray[i][0]
 				div(id=deviceArray[i][1])
 		.container#logoContainer
-			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png')
+			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png', alt='HTML5')
 mixin linkTag(rel,href,type,sizes)
 	each item, i in iconArr
 		link(ref='icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 		link(ref='apple-touch-icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 doctype
-html
+html(lang='en')
 	head
 		title Device Fearture
 		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
@@ -45,62 +45,63 @@ html
 		script
 			include swScript.js
 	body
-		+pTag('Initial connectio state was ','status', 0)
-		#networkState
-		+pTag('Current theoretical network type is ','networkType', 1)
-		+pTag('Current effective network type is ','effectiveNetworkType', 1)
-		+pTag('Current max downlink speed is ','downlinkMax', 0)
-		p.battery Initial battery status was 
-			b#charging unknown
-			|, charging time 
-			b#chargingTime unknown
-			|, discharging time  
-			b#dischargingTime unknown
-			|, level
-			b#level unknown
-			|.
-		#BatteryStatus
-		p Your device memory is 
-			b#result unknown
-			|  Gib.
-		p Estimated storage usage is 
-			b#usage unknown
-			|  bytes.
-		p Estimated storage quota is 
-			b#quota unknown
-			|  bytes.
-		p Estimated usage is 
-			b#percent unknown
-			|  %.
-		div#officeStorage
-			div Offline Storage
-			.btn-group#selectEngine(role='group')
-				button.btn.btn-default(type='button', data-engine='localStorage') Persistent Storage
-				button.btn.btn-default(type='button', data-engine='sessionStorage') Per-Session Storage
+		main
+			+pTag('Initial connectio state was ','status', 0)
+			#networkState
+			+pTag('Current theoretical network type is ','networkType', 1)
+			+pTag('Current effective network type is ','effectiveNetworkType', 1)
+			+pTag('Current max downlink speed is ','downlinkMax', 0)
+			p.battery Initial battery status was 
+				b#charging unknown
+				|, charging time 
+				b#chargingTime unknown
+				|, discharging time  
+				b#dischargingTime unknown
+				|, level
+				b#level unknown
+				|.
+			#BatteryStatus
+			p Your device memory is 
+				b#result unknown
+				|  Gib.
+			p Estimated storage usage is 
+				b#usage unknown
+				|  bytes.
+			p Estimated storage quota is 
+				b#quota unknown
+				|  bytes.
+			p Estimated usage is 
+				b#percent unknown
+				|  %.
+			div#officeStorage
+				div Offline Storage
+				.btn-group#selectEngine(role='group')
+					button.btn.btn-default(type='button', data-engine='localStorage') Persistent Storage
+					button.btn.btn-default(type='button', data-engine='sessionStorage') Per-Session Storage
+				p
+					label(for='value') Value for 
+						code myKey
+						input.form-control#value(type='text')
+				p Open the example in another tab and change the value there to see the synchronization via 
+					code storage
+					|  event.
+				#target
+			div#vibration 
+				div Vibration
+				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
+				.btn(onclick='vibratePattern()') Vibrate with pattern
+			div#geolocation Geolocation
+				.btn#getGeolocation Ask for location
+			+deviceMotion
 			p
-				label(for='value') Value for 
-					code myKey
-					input.form-control#value(type='text')
-			p Open the example in another tab and change the value there to see the synchronization via 
-				code storage
-				|  event.
-			#target
-		div#vibration 
-			div Vibration
-			.btn(onclick='vibrateSimple()') Vibrate for 200 ms
-			.btn(onclick='vibratePattern()') Vibrate with pattern
-		div#geolocation Geolocation
-			.btn#getGeolocation Ask for location
-		+deviceMotion
-		p
-			small Demo from 
-				a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank') HTML5 Rocks
-				|  article.
-		script(type='text/javascript' src='./networkState.js')
-		script(type='text/javascript' src='./networkSpeed.js')
-		script(type='text/javascript' src='./batteryStatus.js')
-		script(type='text/javascript' src='./deviceMemory.js')
-		script(type='text/javascript' src='./geolocation.js')
-		script(type='text/javascript' src='./devicePosition.js')
-		script(type='text/javascript' src='./deviceMotion.js')
-		script(type='text/javascript' src='./storageQuotas.js')
+				small Demo from 
+					a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank') HTML5 Rocks
+					|  article.
+			script(type='text/javascript' src='./networkState.js')
+			script(type='text/javascript' src='./networkSpeed.js')
+			script(type='text/javascript' src='./batteryStatus.js')
+			script(type='text/javascript' src='./deviceMemory.js')
+			script(type='text/javascript' src='./geolocation.js')
+			script(type='text/javascript' src='./devicePosition.js')
+			script(type='text/javascript' src='./deviceMotion.js')
+			script(type='text/javascript' src='./storageQuotas.js')

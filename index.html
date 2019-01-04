@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Device Fearture</title>
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
@@ -65,82 +65,84 @@ p,.btn{line-height: 50px;}
     </script>
   </head>
   <body>
-    <p>Initial connectio state was <b id="status">unknown</b>.</p>
-    <div id="networkState"></div>
-    <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
-    <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
-    <p>Current max downlink speed is <b id="downlinkMax">unknown</b>.</p>
-    <p class="battery">Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time  <b id="dischargingTime">unknown</b>, level<b id="level">unknown</b>.</p>
-    <div id="BatteryStatus"></div>
-    <p>Your device memory is <b id="result">unknown</b> Gib.</p>
-    <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
-    <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
-    <p>Estimated usage is <b id="percent">unknown</b> %.</p>
-    <div id="officeStorage">
-      <div>Offline Storage</div>
-      <div class="btn-group" id="selectEngine" role="group">
-        <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
-        <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
+    <main>
+      <p>Initial connectio state was <b id="status">unknown</b>.</p>
+      <div id="networkState"></div>
+      <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
+      <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
+      <p>Current max downlink speed is <b id="downlinkMax">unknown</b>.</p>
+      <p class="battery">Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time  <b id="dischargingTime">unknown</b>, level<b id="level">unknown</b>.</p>
+      <div id="BatteryStatus"></div>
+      <p>Your device memory is <b id="result">unknown</b> Gib.</p>
+      <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
+      <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
+      <p>Estimated usage is <b id="percent">unknown</b> %.</p>
+      <div id="officeStorage">
+        <div>Offline Storage</div>
+        <div class="btn-group" id="selectEngine" role="group">
+          <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
+          <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
+        </div>
+        <p>
+          <label for="value">Value for <code>myKey</code>
+            <input class="form-control" id="value" type="text">
+          </label>
+        </p>
+        <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
+        <div id="target"></div>
       </div>
-      <p>
-        <label for="value">Value for <code>myKey</code>
-          <input class="form-control" id="value" type="text">
-        </label>
-      </p>
-      <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
-      <div id="target"></div>
-    </div>
-    <div id="vibration"> 
-      <div>Vibration</div>
-      <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
-      <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
-    </div>
-    <div id="geolocation">Geolocation
-      <div class="btn" id="getGeolocation">Ask for location</div>
-    </div>
-    <div id="DeviceMotion">
-      <div>
-        <div>Tilt Left/Right [gamma]</div>
-        <div id="doTiltLR"></div>
+      <div id="vibration"> 
+        <div>Vibration</div>
+        <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
+        <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
       </div>
-      <div>
-        <div>Tilt Front/Back [beta]</div>
-        <div id="doTiltFB"></div>
+      <div id="geolocation">Geolocation
+        <div class="btn" id="getGeolocation">Ask for location</div>
       </div>
-      <div>
-        <div>Direction [alpha]</div>
-        <div id="doDirection"></div>
+      <div id="DeviceMotion">
+        <div>
+          <div>Tilt Left/Right [gamma]</div>
+          <div id="doTiltLR"></div>
+        </div>
+        <div>
+          <div>Tilt Front/Back [beta]</div>
+          <div id="doTiltFB"></div>
+        </div>
+        <div>
+          <div>Direction [alpha]</div>
+          <div id="doDirection"></div>
+        </div>
+        <div>
+          <div>API used</div>
+          <div id="moApi"></div>
+        </div>
+        <div>
+          <div>linear acceleration (excl. gravity)</div>
+          <div id="moAccel"></div>
+        </div>
+        <div>
+          <div>acceleration incl. gravity</div>
+          <div id="moAccelGrav"></div>
+        </div>
+        <div>
+          <div>rotation rate</div>
+          <div id="moRotation"></div>
+        </div>
+        <div>
+          <div>interval (ms)</div>
+          <div id="moInterval"></div>
+        </div>
+        <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5"/></div>
       </div>
-      <div>
-        <div>API used</div>
-        <div id="moApi"></div>
-      </div>
-      <div>
-        <div>linear acceleration (excl. gravity)</div>
-        <div id="moAccel"></div>
-      </div>
-      <div>
-        <div>acceleration incl. gravity</div>
-        <div id="moAccelGrav"></div>
-      </div>
-      <div>
-        <div>rotation rate</div>
-        <div id="moRotation"></div>
-      </div>
-      <div>
-        <div>interval (ms)</div>
-        <div id="moInterval"></div>
-      </div>
-      <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png"/></div>
-    </div>
-    <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>
-    <script type="text/javascript" src="./networkState.js"></script>
-    <script type="text/javascript" src="./networkSpeed.js"></script>
-    <script type="text/javascript" src="./batteryStatus.js"></script>
-    <script type="text/javascript" src="./deviceMemory.js"></script>
-    <script type="text/javascript" src="./geolocation.js"></script>
-    <script type="text/javascript" src="./devicePosition.js"></script>
-    <script type="text/javascript" src="./deviceMotion.js"></script>
-    <script type="text/javascript" src="./storageQuotas.js"></script>
+      <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>
+      <script type="text/javascript" src="./networkState.js"></script>
+      <script type="text/javascript" src="./networkSpeed.js"></script>
+      <script type="text/javascript" src="./batteryStatus.js"></script>
+      <script type="text/javascript" src="./deviceMemory.js"></script>
+      <script type="text/javascript" src="./geolocation.js"></script>
+      <script type="text/javascript" src="./devicePosition.js"></script>
+      <script type="text/javascript" src="./deviceMotion.js"></script>
+      <script type="text/javascript" src="./storageQuotas.js"></script>
+    </main>
   </body>
 </html>
