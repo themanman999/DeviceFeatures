@@ -3,6 +3,21 @@
   <head>
     <title>Device Fearture</title>
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="DeviceFeatures">
+    <meta name="apple-mobile-web-app-title" content="DeviceFeatures">
+    <meta name="theme-color" content="#ccc">
+    <meta name="msapplication-navbutton-color" content="#ccc">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="https://themanman999.github.io/DeviceFeatures/">
+    <link ref="manifest" href="./manifest.json">
+    <link ref="icon" type="image/png" sizes="16x16" href="icons/icon_16.png"/>
+    <link ref="apple-touch-icon" type="image/png" sizes="16x16" href="icons/icon_16.png"/>
+    <link ref="icon" type="image/png" sizes="192x192" href="icons/icon_192.png"/>
+    <link ref="apple-touch-icon" type="image/png" sizes="192x192" href="icons/icon_192.png"/>
+    <link ref="icon" type="image/png" sizes="512x512" href="icons/icon_512.png"/>
+    <link ref="apple-touch-icon" type="image/png" sizes="512x512" href="icons/icon_512.png"/>
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
@@ -30,8 +45,24 @@ p,.btn{line-height: 50px;}
 	#DeviceMotion > div > div{width:50%;}
 	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
-
+@media screen and (max-width:480px){
+	#officeStorage .btn-group button{width:40% !important; font-size:small !important;}	
+	#vibration div:not(:nth-child(1)){width:36% !important; font-size:small !important;}
+}
     </style>
+    <script>if ("serviceWorker" in navigator) { 
+  window.addEventListener("load", function() {   
+    navigator.serviceWorker.register("sw.js").then(
+      function(registration) { 
+        // Registration was successful
+        console.log("ServiceWorker registration successful with scope: ", registration.scope); }, 
+      function(err) { 
+        // registration failed :( 
+        console.log("ServiceWorker registration failed: ", err); 
+      }); 
+  });
+}
+    </script>
   </head>
   <body>
     <p>Initial connectio state was <b id="status">unknown</b>.</p>
@@ -47,7 +78,6 @@ p,.btn{line-height: 50px;}
     <p>Estimated usage is <b id="percent">unknown</b> %.</p>
     <div id="officeStorage">
       <div>Offline Storage</div>
-      <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
       <div class="btn-group" id="selectEngine" role="group">
         <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
         <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
@@ -57,6 +87,8 @@ p,.btn{line-height: 50px;}
           <input class="form-control" id="value" type="text">
         </label>
       </p>
+      <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
+      <div id="target"></div>
     </div>
     <div id="vibration"> 
       <div>Vibration</div>

@@ -9,6 +9,12 @@
 		['rotation rate','moRotation'],
 		['interval (ms)','moInterval']
 	]
+-
+	var iconArr = [
+		['16x16','icons/icon_16.png'],
+		['192x192','icons/icon_192.png'],
+		['512x512','icons/icon_512.png']
+	]
 mixin pTag(string, idName, isUnknown)
 	p= string
 		b(id=idName)= isUnknown===0 ? 'unknown' : 'not available'
@@ -21,14 +27,23 @@ mixin deviceMotion
 				div(id=deviceArray[i][1])
 		.container#logoContainer
 			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png')
+mixin linkTag(rel,href,type,sizes)
+	each item, i in iconArr
+		link(ref='icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
+		link(ref='apple-touch-icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 doctype
 html
 	head
 		title Device Fearture
 		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
+		include meta
+		link(ref='manifest', href='./manifest.json')
+		+linkTag
 		script(type='text/javascript' src='./vibration.js')
 		style
 			include style.css
+		script
+			include swScript.js
 	body
 		+pTag('Initial connectio state was ','status', 0)
 		#networkState
@@ -59,9 +74,6 @@ html
 			|  %.
 		div#officeStorage
 			div Offline Storage
-			p Open the example in another tab and change the value there to see the synchronization via 
-				code storage
-				|  event.
 			.btn-group#selectEngine(role='group')
 				button.btn.btn-default(type='button', data-engine='localStorage') Persistent Storage
 				button.btn.btn-default(type='button', data-engine='sessionStorage') Per-Session Storage
@@ -69,6 +81,10 @@ html
 				label(for='value') Value for 
 					code myKey
 					input.form-control#value(type='text')
+			p Open the example in another tab and change the value there to see the synchronization via 
+				code storage
+				|  event.
+			#target
 		div#vibration 
 			div Vibration
 			.btn(onclick='vibrateSimple()') Vibrate for 200 ms

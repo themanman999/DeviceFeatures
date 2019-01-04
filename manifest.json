@@ -1,0 +1,25 @@
+{
+  "name": "DeviceFeatures",
+  "short_name": "DeviceFeatures",
+  "lang": "zh-TW",
+  "start_url": "https://themanman999.github.io/DeviceFeatures/",
+  "display": "standalone",
+  "theme_color": "#ccc",
+  "icons": [
+    {
+      "src": "icons/icon_16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon_512.png",
+      "sizes": "512x512",
+      "type": "image/pngicon"
+    }
+  ]
+}
