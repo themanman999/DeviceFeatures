@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
-p,.btn,#officeStorage,#DeviceMotion{width: 500px; height: 50px; margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
-p,.btn{line-height: 50px;  text-align: center;}
+p,.btn,#officeStorage{height: 50px;}
+p,.btn,#officeStorage,#geolocation{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn,#geolocation{text-align: center;}
+p,.btn{line-height: 50px;}
+#geolocation div{width:auto;}
 #officeStorage{height:260px !important;}
 #officeStorage p:nth-child(2){line-height:25px;}
 #officeStorage div:nth-child(1){text-align:center;}
@@ -16,13 +19,18 @@ p,.btn{line-height: 50px;  text-align: center;}
 #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
 .battery,#officeStorage .btn-group button{line-height: 25px;}
-#DeviceMotion{height:auto;}
-#DeviceMotion > div{display:-webkit-box;}
-#DeviceMotion > div > div{width:50%;}
+#vibration,#DeviceMotion{display:none;}
 @media screen and (max-width:600px){
-	p, .btn,#officeStorage,#DeviceMotion{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
+	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#officeStorage .btn-group button{width:41% !important;}
+	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
+	#vibration div{width:38% !important; display:inline-block;}
+	#vibration div:nth-child(1){width:100% !important; text-align:center;}
+	#DeviceMotion > div{display:-webkit-box;}
+	#DeviceMotion > div > div{width:50%;}
+	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
+
     </style>
   </head>
   <body>
@@ -50,10 +58,14 @@ p,.btn{line-height: 50px;  text-align: center;}
         </label>
       </p>
     </div>
-    <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
-    <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
-    <div class="btn" id="askButton">Ask for location</div>
-    <div id="geolocation"></div>
+    <div id="vibration"> 
+      <div>Vibration</div>
+      <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
+      <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
+    </div>
+    <div id="geolocation">Geolocation
+      <div class="btn" id="getGeolocation">Ask for location</div>
+    </div>
     <div id="DeviceMotion">
       <div>
         <div>Tilt Left/Right [gamma]</div>
@@ -87,8 +99,8 @@ p,.btn{line-height: 50px;  text-align: center;}
         <div>interval (ms)</div>
         <div id="moInterval"></div>
       </div>
+      <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png"/></div>
     </div>
-    <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png"></div>
     <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>
     <script type="text/javascript" src="./networkState.js"></script>
     <script type="text/javascript" src="./networkSpeed.js"></script>

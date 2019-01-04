@@ -19,6 +19,8 @@ mixin deviceMotion
 			div
 				div= deviceArray[i][0]
 				div(id=deviceArray[i][1])
+		.container#logoContainer
+			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png')
 doctype
 html
 	head
@@ -67,13 +69,13 @@ html
 				label(for='value') Value for 
 					code myKey
 					input.form-control#value(type='text')
-		.btn(onclick='vibrateSimple()') Vibrate for 200 ms
-		.btn(onclick='vibratePattern()') Vibrate with pattern
-		.btn#askButton Ask for location
-		#geolocation
+		div#vibration 
+			div Vibration
+			.btn(onclick='vibrateSimple()') Vibrate for 200 ms
+			.btn(onclick='vibratePattern()') Vibrate with pattern
+		div#geolocation Geolocation
+			.btn#getGeolocation Ask for location
 		+deviceMotion
-		.container#logoContainer
-			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png')
 		p
 			small Demo from 
 				a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank') HTML5 Rocks
