@@ -4,19 +4,25 @@
     <title>Device Fearture</title>
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
     <script type="text/javascript" src="./vibration.js"></script>
-    <script type="text/javascript" src="./storageQuotas.js"></script>
-    <script type="text/javascript" src="./offlineStorage.js"></script>
     <style>body{margin: 0 auto;}
-p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-height: 50px; margin: 10px auto; padding: 5px; text-align: center;}
- .container { perspective:300; -webkit-perspective:300;}
- #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
- .btn {background: #ccc; box-shadow: 2px 2px;}
- .battery{line-height: 25px;}
- #DeviceMotion > div{display:-webkit-box;}
- #DeviceMotion > div > div{width:50%;}
- @media screen and (max-width:600px){
-  p, .btn{width: auto; height: auto; margin:15px; padding: 10px 5px;}
- }
+p,.btn,#officeStorage,#DeviceMotion{width: 500px; height: 50px; margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn{line-height: 50px;  text-align: center;}
+#officeStorage{height:260px !important;}
+#officeStorage p:nth-child(2){line-height:25px;}
+#officeStorage div:nth-child(1){text-align:center;}
+#officeStorage .btn-group button{width:49.5% !important; outline:none;}
+#officeStorage .btn-group,#officeStorage p{width:auto !important;}
+.container { perspective:300; -webkit-perspective:300;}
+#imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
+.btn {background: #ccc; box-shadow: 2px 2px;}
+.battery,#officeStorage .btn-group button{line-height: 25px;}
+#DeviceMotion{height:auto;}
+#DeviceMotion > div{display:-webkit-box;}
+#DeviceMotion > div > div{width:50%;}
+@media screen and (max-width:600px){
+	p, .btn,#officeStorage,#DeviceMotion{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
+	#officeStorage .btn-group button{width:41% !important;}
+}
     </style>
   </head>
   <body>
@@ -31,19 +37,19 @@ p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-h
     <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
     <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
     <p>Estimated usage is <b id="percent">unknown</b> %.</p>
-    <p>
-      <label>Engine</label>
-    </p>
-    <div class="btn-group" id="selectEngine" role="group">
-      <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
-      <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
+    <div id="officeStorage">
+      <div>Offline Storage</div>
+      <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
+      <div class="btn-group" id="selectEngine" role="group">
+        <button class="btn btn-default" type="button" data-engine="localStorage">Persistent Storage</button>
+        <button class="btn btn-default" type="button" data-engine="sessionStorage">Per-Session Storage</button>
+      </div>
+      <p>
+        <label for="value">Value for <code>myKey</code>
+          <input class="form-control" id="value" type="text">
+        </label>
+      </p>
     </div>
-    <p>
-      <label for="value">Value for<code>myKey</code>
-        <input class="form-control" id="value" type="text">
-      </label>
-    </p>
-    <p>Open the example in another tab and change the value there to see the synchronization via <code>storage</code> event.</p>
     <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
     <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
     <div class="btn" id="askButton">Ask for location</div>
@@ -91,5 +97,6 @@ p,.btn{border: 1px solid; border-radius: 5px; width: 500px; height: 50px; line-h
     <script type="text/javascript" src="./geolocation.js"></script>
     <script type="text/javascript" src="./devicePosition.js"></script>
     <script type="text/javascript" src="./deviceMotion.js"></script>
+    <script type="text/javascript" src="./storageQuotas.js"></script>
   </body>
 </html>
