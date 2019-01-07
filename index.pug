@@ -60,19 +60,20 @@ html(lang='en')
 			p Estimated usage is 
 				b#percent unknown
 				|  %.
-			div#officeStorage
-				div Offline Storage
-				.btn-group#selectEngine(role='group')
-					button.btn.btn-default(type='button', data-engine='localStorage') Persistent Storage
-					button.btn.btn-default(type='button', data-engine='sessionStorage') Per-Session Storage
+			div#localNotifications
+				p Current permission status is 
+					|
+					b#noticeStatus unavailable
+					|.
 				p
-					label(for='value') Value for 
-						code myKey
-					input.form-control#value(type='text')
-				p Open the example in another tab and change the value there to see the synchronization via 
-					code storage
-					|  event.
-				#target
+					|
+					button.btn.btn-default(onclick="requestPermission()") Request premission
+				p
+					|
+					button.btn.btn-default(onclick="nonPersistentNotification()") Non-persistent notification
+				p
+					|
+					button.btn.btn-default(onclick="persistentNotification()") Persistent notification
 			div#vibration 
 				div Vibration
 				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
@@ -92,3 +93,4 @@ html(lang='en')
 			script(type='text/javascript' src='./devicePosition.js')
 			script(type='text/javascript' src='./deviceMotion.js')
 			script(type='text/javascript' src='./storageQuotas.js')
+			script(type='text/javascript' src='./offlineStorage.js')
