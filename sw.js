@@ -1,1 +1,1 @@
-"use strict";importScripts("sw-toolbox.js"),toolbox.precache(["index.html","vibration.js","networkState.js","networkSpeed.js","batteryStatus.js","deviceMemory.js","geolocation.js","devicePosition.js","deviceMotion.js","storageQuotas.js"]),toolbox.router.get("/icons/*",toolbox.cacheFirst),toolbox.router.get("/*",toolbox.networkFirst,{networkTimeoutSeconds:5});
+"use strict";importScripts("sw-toolbox.js"),toolbox.precache(["index.html"]),toolbox.router.get("/icons/*",toolbox.cacheFirst),toolbox.router.get("/*",toolbox.networkFirst,{networkTimeoutSeconds:5});
