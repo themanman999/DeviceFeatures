@@ -1,15 +1,4 @@
 -
-	var deviceArray = [
-		['Tilt Left/Right [gamma]','doTiltLR'],
-		['Tilt Front/Back [beta]','doTiltFB'],
-		['Direction [alpha]','doDirection'],
-		['API used','moApi'],
-		['linear acceleration (excl. gravity)','moAccel'],
-		['acceleration incl. gravity','moAccelGrav'],
-		['rotation rate','moRotation'],
-		['interval (ms)','moInterval']
-	]
--
 	var iconArr = [
 		['16x16','icons/icon_16.png'],
 		['48x48','icons/icon_48.png'],
@@ -26,6 +15,21 @@
 		['192x192','icons/icon_192.png'],
 		['512x512','icons/icon_512.png']
 	]
+-
+	var deviceArray = [
+		['Tilt Left/Right [gamma]','doTiltLR'],
+		['Tilt Front/Back [beta]','doTiltFB'],
+		['Direction [alpha]','doDirection'],
+		['API used','moApi'],
+		['linear acceleration (excl. gravity)','moAccel'],
+		['acceleration incl. gravity','moAccelGrav'],
+		['rotation rate','moRotation'],
+		['interval (ms)','moInterval']
+	]
+mixin linkTag(rel,href,type,sizes)
+	each item, i in iconArr
+		link(rel='icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
+		link(rel='apple-touch-icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 mixin pTag(string, idName, isUnknown)
 	p= string
 		b(id=idName)= isUnknown===0 ? 'unknown' : 'not available'
@@ -38,10 +42,6 @@ mixin deviceMotion
 				div(id=deviceArray[i][1])
 		.container#logoContainer
 			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png', alt='HTML5')
-mixin linkTag(rel,href,type,sizes)
-	each item, i in iconArr
-		link(ref='icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
-		link(ref='apple-touch-icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 doctype
 html(lang='en')
 	head
@@ -49,7 +49,7 @@ html(lang='en')
 		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
 		include meta
 		+linkTag
-		link(ref='manifest', href='manifest.json')
+		link(rel='manifest', href='manifest.json')
 		script(type='text/javascript' src='./vibration.js')
 		style
 			include style.css
