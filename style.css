@@ -1,6 +1,6 @@
 body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
-p,.btn,#officeStorage,#geolocation{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
 p,.btn,#geolocation{text-align: center;}
 p,.btn{line-height: 50px;}
 #geolocation div{width:auto;}
@@ -26,5 +26,5 @@ p,.btn{line-height: 50px;}
 }
 @media screen and (max-width:480px){
 	#officeStorage .btn-group button{width:40% !important; font-size:small !important;}	
-	#vibration div{width:36% !important; font-size:small !important;}
+	#vibration div:not(:nth-child(1)){width:36% !important; font-size:small !important;}
 }

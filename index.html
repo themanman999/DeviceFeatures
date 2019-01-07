@@ -46,7 +46,7 @@
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
-p,.btn,#officeStorage,#geolocation{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
 p,.btn,#geolocation{text-align: center;}
 p,.btn{line-height: 50px;}
 #geolocation div{width:auto;}
@@ -102,16 +102,12 @@ p,.btn{line-height: 50px;}
       <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
       <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
       <p>Estimated usage is <b id="percent">unknown</b> %.</p>
-      <div id="localNotifications">
+      <div id="localNotifications">Local Notifications
         <p>
           Current permission status is <b id="noticeStatus">unavailable</b>.</p>
         <p>
           <button class="btn btn-default" onclick="requestPermission()">Request premission</button>
-        </p>
-        <p>
           <button class="btn btn-default" onclick="nonPersistentNotification()">Non-persistent notification</button>
-        </p>
-        <p>
           <button class="btn btn-default" onclick="persistentNotification()">Persistent notification</button>
         </p>
       </div>

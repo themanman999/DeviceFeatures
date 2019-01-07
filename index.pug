@@ -60,7 +60,7 @@ html(lang='en')
 			p Estimated usage is 
 				b#percent unknown
 				|  %.
-			div#localNotifications
+			div#localNotifications Local Notifications
 				p Current permission status is 
 					|
 					b#noticeStatus unavailable
@@ -68,11 +68,7 @@ html(lang='en')
 				p
 					|
 					button.btn.btn-default(onclick="requestPermission()") Request premission
-				p
-					|
 					button.btn.btn-default(onclick="nonPersistentNotification()") Non-persistent notification
-				p
-					|
 					button.btn.btn-default(onclick="persistentNotification()") Persistent notification
 			div#vibration 
 				div Vibration
