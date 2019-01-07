@@ -25,6 +25,6 @@ p,.btn{line-height: 50px;}
 @media screen and (max-width:480px){
 	#officeStorage .btn-group button{width:40% !important; font-size:small !important;}	
 	#vibration div:not(:nth-child(1)){width:36% !important; font-size:small !important;}
-	#localNotifications button{width:50% !important;}
+	#localNotifications button{width:33% !important; line-height:25px;}
 	#localNotifications button:nth-child(1){width:50% !important;}
 }
