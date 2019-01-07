@@ -16,16 +16,18 @@ function requestPermission() {
 }
 
 function nonPersistentNotification() {
-  if (!('Notification' in window)) {
-    alert('Notification API not supported!');
-    return;
-  }
+  if (!window.Notification || !Notification.requestPermission)
+      return false;
+  if (Notification.permission == 'granted')
+      throw new Error('You must only call this *before* calling Notification.requestPermission(), otherwise this feature detect would bug the user with an actual notification!');
   
-  try {
-    var notification = new Notification("Hi there - non-persistent!");
-  } catch (err) {
-    alert('Notification API error: ' + err);
-  }
+    try {
+        new Notification('');
+    } catch (e) {
+        if (e.name == 'TypeError')
+            return false;
+    }
+    return true;
 }
 
 function persistentNotification() {
