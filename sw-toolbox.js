@@ -2,126 +2,150 @@
     if ("object" == typeof exports && "undefined" != typeof module) module.exports = e();
     else if ("function" == typeof define && define.amd) define([], e);
     else {
-        ("undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this).toolbox = e()
+        var t;
+        t = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : this, t.toolbox = e()
     }
 }(function() {
     return function e(t, n, r) {
-        function o(s, c) {
-            if (!n[s]) {
-                if (!t[s]) {
+        function o(c, s) {
+            if (!n[c]) {
+                if (!t[c]) {
                     var a = "function" == typeof require && require;
-                    if (!c && a) return a(s, !0);
-                    if (i) return i(s, !0);
-                    var u = new Error("Cannot find module '" + s + "'");
+                    if (!s && a) return a(c, !0);
+                    if (i) return i(c, !0);
+                    var u = new Error("Cannot find module '" + c + "'");
                     throw u.code = "MODULE_NOT_FOUND", u
                 }
-                var f = n[s] = {
+                var f = n[c] = {
                     exports: {}
                 };
-                t[s][0].call(f.exports, function(e) {
-                    return o(t[s][1][e] || e)
+                t[c][0].call(f.exports, function(e) {
+                    var n = t[c][1][e];
+                    return o(n || e)
                 }, f, f.exports, e, t, n, r)
             }
-            return n[s].exports
+            return n[c].exports
         }
-        for (var i = "function" == typeof require && require, s = 0; s < r.length; s++) o(r[s]);
+        for (var i = "function" == typeof require && require, c = 0; c < r.length; c++) o(r[c]);
         return o
     }({
         1: [function(e, t, n) {
             "use strict";
 
             function r(e, t) {
-                ((t = t || {}).debug || c.debug) && console.log("[sw-toolbox] " + e)
+                t = t || {}, (t.debug || m.debug) && console.log("[sw-toolbox] " + e)
             }
 
             function o(e) {
                 var t;
-                return e && e.cache && (t = e.cache.name), t = t || c.cache.name, caches.open(t)
+                return e && e.cache && (t = e.cache.name), t = t || m.cache.name, caches.open(t)
             }
 
-            function i(e) {
+            function i(e, t) {
+                t = t || {};
+                var n = t.successResponses || m.successResponses;
+                return fetch(e.clone()).then(function(r) {
+                    return "GET" === e.method && n.test(r.status) && o(t).then(function(n) {
+                        n.put(e, r).then(function() {
+                            var r = t.cache || m.cache;
+                            (r.maxEntries || r.maxAgeSeconds) && r.name && c(e, n, r)
+                        })
+                    }), r.clone()
+                })
+            }
+
+            function c(e, t, n) {
+                var r = s.bind(null, e, t, n);
+                d = d ? d.then(r) : r()
+            }
+
+            function s(e, t, n) {
+                var o = e.url,
+                    i = n.maxAgeSeconds,
+                    c = n.maxEntries,
+                    s = n.name,
+                    a = Date.now();
+                return r("Updating LRU order for " + o + ". Max entries is " + c + ", max age is " + i), g.getDb(s).then(function(e) {
+                    return g.setTimestampForUrl(e, o, a)
+                }).then(function(e) {
+                    return g.expireEntries(e, c, i, a)
+                }).then(function(e) {
+                    r("Successfully updated IDB.");
+                    var n = e.map(function(e) {
+                        return t.delete(e)
+                    });
+                    return Promise.all(n).then(function() {
+                        r("Done with cache cleanup.")
+                    })
+                }).catch(function(e) {
+                    r(e)
+                })
+            }
+
+            function a(e, t, n) {
+                return r("Renaming cache: [" + e + "] to [" + t + "]", n), caches.delete(t).then(function() {
+                    return Promise.all([caches.open(e), caches.open(t)]).then(function(t) {
+                        var n = t[0],
+                            r = t[1];
+                        return n.keys().then(function(e) {
+                            return Promise.all(e.map(function(e) {
+                                return n.match(e).then(function(t) {
+                                    return r.put(e, t)
+                                })
+                            }))
+                        }).then(function() {
+                            return caches.delete(e)
+                        })
+                    })
+                })
+            }
+
+            function u(e, t) {
+                return o(t).then(function(t) {
+                    return t.add(e)
+                })
+            }
+
+            function f(e, t) {
+                return o(t).then(function(t) {
+                    return t.delete(e)
+                })
+            }
+
+            function h(e) {
+                e instanceof Promise || p(e), m.preCacheItems = m.preCacheItems.concat(e)
+            }
+
+            function p(e) {
                 var t = Array.isArray(e);
                 if (t && e.forEach(function(e) {
                         "string" == typeof e || e instanceof Request || (t = !1)
                     }), !t) throw new TypeError("The precache method expects either an array of strings and/or Requests or a Promise that resolves to an array of strings and/or Requests.");
                 return e
             }
-            var s, c = e("./options"),
-                a = e("./idb-cache-expiration");
+
+            function l(e, t, n) {
+                if (!e) return !1;
+                if (t) {
+                    var r = e.headers.get("date");
+                    if (r) {
+                        if (new Date(r).getTime() + 1e3 * t < n) return !1
+                    }
+                }
+                return !0
+            }
+            var d, m = e("./options"),
+                g = e("./idb-cache-expiration");
             t.exports = {
                 debug: r,
-                fetchAndCache: function(e, t) {
-                    var n = (t = t || {}).successResponses || c.successResponses;
-                    return fetch(e.clone()).then(function(i) {
-                        return "GET" === e.method && n.test(i.status) && o(t).then(function(n) {
-                            n.put(e, i).then(function() {
-                                var o, i = t.cache || c.cache;
-                                (i.maxEntries || i.maxAgeSeconds) && i.name && (o = function(e, t, n) {
-                                    var o = e.url,
-                                        i = n.maxAgeSeconds,
-                                        s = n.maxEntries,
-                                        c = n.name,
-                                        u = Date.now();
-                                    return r("Updating LRU order for " + o + ". Max entries is " + s + ", max age is " + i), a.getDb(c).then(function(e) {
-                                        return a.setTimestampForUrl(e, o, u)
-                                    }).then(function(e) {
-                                        return a.expireEntries(e, s, i, u)
-                                    }).then(function(e) {
-                                        r("Successfully updated IDB.");
-                                        var n = e.map(function(e) {
-                                            return t.delete(e)
-                                        });
-                                        return Promise.all(n).then(function() {
-                                            r("Done with cache cleanup.")
-                                        })
-                                    }).catch(function(e) {
-                                        r(e)
-                                    })
-                                }.bind(null, e, n, i), s = s ? s.then(o) : o())
-                            })
-                        }), i.clone()
-                    })
-                },
+                fetchAndCache: i,
                 openCache: o,
-                renameCache: function(e, t, n) {
-                    return r("Renaming cache: [" + e + "] to [" + t + "]", n), caches.delete(t).then(function() {
-                        return Promise.all([caches.open(e), caches.open(t)]).then(function(t) {
-                            var n = t[0],
-                                r = t[1];
-                            return n.keys().then(function(e) {
-                                return Promise.all(e.map(function(e) {
-                                    return n.match(e).then(function(t) {
-                                        return r.put(e, t)
-                                    })
-                                }))
-                            }).then(function() {
-                                return caches.delete(e)
-                            })
-                        })
-                    })
-                },
-                cache: function(e, t) {
-                    return o(t).then(function(t) {
-                        return t.add(e)
-                    })
-                },
-                uncache: function(e, t) {
-                    return o(t).then(function(t) {
-                        return t.delete(e)
-                    })
-                },
-                precache: function(e) {
-                    e instanceof Promise || i(e), c.preCacheItems = c.preCacheItems.concat(e)
-                },
-                validatePrecacheInput: i,
-                isResponseFresh: function(e, t, n) {
-                    if (!e) return !1;
-                    if (t) {
-                        var r = e.headers.get("date");
-                        if (r && new Date(r).getTime() + 1e3 * t < n) return !1
-                    }
-                    return !0
-                }
+                renameCache: a,
+                cache: u,
+                uncache: f,
+                precache: h,
+                validatePrecacheInput: p,
+                isResponseFresh: l
             }
         }, {
             "./idb-cache-expiration": 2,
@@ -129,120 +153,141 @@
         }],
         2: [function(e, t, n) {
             "use strict";
-            var r = "sw-toolbox-",
-                o = 1,
-                i = "store",
-                s = "url",
-                c = "timestamp",
-                a = {};
-            t.exports = {
-                getDb: function(e) {
-                    return e in a || (a[e] = (t = e, new Promise(function(e, n) {
-                        var a = indexedDB.open(r + t, o);
-                        a.onupgradeneeded = function() {
-                            a.result.createObjectStore(i, {
-                                keyPath: s
-                            }).createIndex(c, c, {
-                                unique: !1
-                            })
-                        }, a.onsuccess = function() {
-                            e(a.result)
-                        }, a.onerror = function() {
-                            n(a.error)
+
+            function r(e) {
+                return new Promise(function(t, n) {
+                    var r = indexedDB.open(u + e, f);
+                    r.onupgradeneeded = function() {
+                        r.result.createObjectStore(h, {
+                            keyPath: p
+                        }).createIndex(l, l, {
+                            unique: !1
+                        })
+                    }, r.onsuccess = function() {
+                        t(r.result)
+                    }, r.onerror = function() {
+                        n(r.error)
+                    }
+                })
+            }
+
+            function o(e) {
+                return e in d || (d[e] = r(e)), d[e]
+            }
+
+            function i(e, t, n) {
+                return new Promise(function(r, o) {
+                    var i = e.transaction(h, "readwrite");
+                    i.objectStore(h).put({
+                        url: t,
+                        timestamp: n
+                    }), i.oncomplete = function() {
+                        r(e)
+                    }, i.onabort = function() {
+                        o(i.error)
+                    }
+                })
+            }
+
+            function c(e, t, n) {
+                return t ? new Promise(function(r, o) {
+                    var i = 1e3 * t,
+                        c = [],
+                        s = e.transaction(h, "readwrite"),
+                        a = s.objectStore(h);
+                    a.index(l).openCursor().onsuccess = function(e) {
+                        var t = e.target.result;
+                        if (t && n - i > t.value[l]) {
+                            var r = t.value[p];
+                            c.push(r), a.delete(r), t.continue()
                         }
-                    }))), a[e];
-                    var t
-                },
-                setTimestampForUrl: function(e, t, n) {
-                    return new Promise(function(r, o) {
-                        var s = e.transaction(i, "readwrite");
-                        s.objectStore(i).put({
-                            url: t,
-                            timestamp: n
-                        }), s.oncomplete = function() {
-                            r(e)
-                        }, s.onabort = function() {
-                            o(s.error)
-                        }
-                    })
-                },
-                expireEntries: function(e, t, n, r) {
-                    return (o = e, a = n, u = r, a ? new Promise(function(e, t) {
-                        var n = 1e3 * a,
-                            r = [],
-                            f = o.transaction(i, "readwrite"),
-                            h = f.objectStore(i);
-                        h.index(c).openCursor().onsuccess = function(e) {
-                            var t = e.target.result;
-                            if (t && u - n > t.value[c]) {
-                                var o = t.value[s];
-                                r.push(o), h.delete(o), t.continue()
+                    }, s.oncomplete = function() {
+                        r(c)
+                    }, s.onabort = o
+                }) : Promise.resolve([])
+            }
+
+            function s(e, t) {
+                return t ? new Promise(function(n, r) {
+                    var o = [],
+                        i = e.transaction(h, "readwrite"),
+                        c = i.objectStore(h),
+                        s = c.index(l),
+                        a = s.count();
+                    s.count().onsuccess = function() {
+                        var e = a.result;
+                        e > t && (s.openCursor().onsuccess = function(n) {
+                            var r = n.target.result;
+                            if (r) {
+                                var i = r.value[p];
+                                o.push(i), c.delete(i), e - o.length > t && r.continue()
                             }
-                        }, f.oncomplete = function() {
-                            e(r)
-                        }, f.onabort = t
-                    }) : Promise.resolve([])).then(function(n) {
-                        return (r = e, o = t, o ? new Promise(function(e, t) {
-                            var n = [],
-                                a = r.transaction(i, "readwrite"),
-                                u = a.objectStore(i),
-                                f = u.index(c),
-                                h = f.count();
-                            f.count().onsuccess = function() {
-                                var e = h.result;
-                                e > o && (f.openCursor().onsuccess = function(t) {
-                                    var r = t.target.result;
-                                    if (r) {
-                                        var i = r.value[s];
-                                        n.push(i), u.delete(i), e - n.length > o && r.continue()
-                                    }
-                                })
-                            }, a.oncomplete = function() {
-                                e(n)
-                            }, a.onabort = t
-                        }) : Promise.resolve([])).then(function(e) {
-                            return n.concat(e)
-                        });
-                        var r, o
-                    });
-                    var o, a, u
-                }
+                        })
+                    }, i.oncomplete = function() {
+                        n(o)
+                    }, i.onabort = r
+                }) : Promise.resolve([])
+            }
+
+            function a(e, t, n, r) {
+                return c(e, n, r).then(function(n) {
+                    return s(e, t).then(function(e) {
+                        return n.concat(e)
+                    })
+                })
+            }
+            var u = "sw-toolbox-",
+                f = 1,
+                h = "store",
+                p = "url",
+                l = "timestamp",
+                d = {};
+            t.exports = {
+                getDb: o,
+                setTimestampForUrl: i,
+                expireEntries: a
             }
         }, {}],
         3: [function(e, t, n) {
             "use strict";
 
             function r(e) {
+                var t = a.match(e.request);
+                t ? e.respondWith(t(e.request)) : a.default && "GET" === e.request.method && 0 === e.request.url.indexOf("http") && e.respondWith(a.default(e.request))
+            }
+
+            function o(e) {
+                s.debug("activate event fired");
+                var t = u.cache.name + "$$$inactive$$$";
+                e.waitUntil(s.renameCache(t, u.cache.name))
+            }
+
+            function i(e) {
                 return e.reduce(function(e, t) {
                     return e.concat(t)
                 }, [])
             }
+
+            function c(e) {
+                var t = u.cache.name + "$$$inactive$$$";
+                s.debug("install event fired"), s.debug("creating cache [" + t + "]"), e.waitUntil(s.openCache({
+                    cache: {
+                        name: t
+                    }
+                }).then(function(e) {
+                    return Promise.all(u.preCacheItems).then(i).then(s.validatePrecacheInput).then(function(t) {
+                        return s.debug("preCache list: " + (t.join(", ") || "(none)")), e.addAll(t)
+                    })
+                }))
+            }
             e("serviceworker-cache-polyfill");
-            var o = e("./helpers"),
-                i = e("./router"),
-                s = e("./options");
+            var s = e("./helpers"),
+                a = e("./router"),
+                u = e("./options");
             t.exports = {
-                fetchListener: function(e) {
-                    var t = i.match(e.request);
-                    t ? e.respondWith(t(e.request)) : i.default && "GET" === e.request.method && 0 === e.request.url.indexOf("http") && e.respondWith(i.default(e.request))
-                },
-                activateListener: function(e) {
-                    o.debug("activate event fired");
-                    var t = s.cache.name + "$$$inactive$$$";
-                    e.waitUntil(o.renameCache(t, s.cache.name))
-                },
-                installListener: function(e) {
-                    var t = s.cache.name + "$$$inactive$$$";
-                    o.debug("install event fired"), o.debug("creating cache [" + t + "]"), e.waitUntil(o.openCache({
-                        cache: {
-                            name: t
-                        }
-                    }).then(function(e) {
-                        return Promise.all(s.preCacheItems).then(r).then(o.validatePrecacheInput).then(function(t) {
-                            return o.debug("preCache list: " + (t.join(", ") || "(none)")), e.addAll(t)
-                        })
-                    }))
-                }
+                fetchListener: r,
+                activateListener: o,
+                installListener: c
             }
         }, {
             "./helpers": 1,
@@ -268,12 +313,13 @@
         }, {}],
         5: [function(e, t, n) {
             "use strict";
-            var r = new URL("./", self.location).pathname,
-                o = e("path-to-regexp"),
-                i = function(e, t, n, i) {
-                    t instanceof RegExp ? this.fullUrlRegExp = t : (0 !== t.indexOf("/") && (t = r + t), this.keys = [], this.regexp = o(t, this.keys)), this.method = e, this.options = i, this.handler = n
+            var r = new URL("./", self.location),
+                o = r.pathname,
+                i = e("path-to-regexp"),
+                c = function(e, t, n, r) {
+                    t instanceof RegExp ? this.fullUrlRegExp = t : (0 !== t.indexOf("/") && (t = o + t), this.keys = [], this.regexp = i(t, this.keys)), this.method = e, this.options = r, this.handler = n
                 };
-            i.prototype.makeHandler = function(e) {
+            c.prototype.makeHandler = function(e) {
                 var t;
                 if (this.regexp) {
                     var n = this.regexp.exec(e);
@@ -284,16 +330,22 @@
                 return function(e) {
                     return this.handler(e, t, this.options)
                 }.bind(this)
-            }, t.exports = i
+            }, t.exports = c
         }, {
             "path-to-regexp": 15
         }],
         6: [function(e, t, n) {
             "use strict";
-            var r = e("./route"),
-                o = e("./helpers"),
-                i = function(e, t) {
-                    for (var n = e.entries(), r = n.next(), o = []; !r.done;) new RegExp(r.value[0]).test(t) && o.push(r.value[1]), r = n.next();
+
+            function r(e) {
+                return e.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")
+            }
+            var o = e("./route"),
+                i = e("./helpers"),
+                c = function(e, t) {
+                    for (var n = e.entries(), r = n.next(), o = []; !r.done;) {
+                        new RegExp(r.value[0]).test(t) && o.push(r.value[1]), r = n.next()
+                    }
                     return o
                 },
                 s = function() {
@@ -303,29 +355,30 @@
                 s.prototype[e] = function(t, n, r) {
                     return this.add(e, t, n, r)
                 }
-            }), s.prototype.add = function(e, t, n, i) {
+            }), s.prototype.add = function(e, t, n, c) {
+                c = c || {};
                 var s;
-                i = i || {}, t instanceof RegExp ? s = RegExp : s = (s = i.origin || self.location.origin) instanceof RegExp ? s.source : s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), e = e.toLowerCase();
-                var c = new r(e, t, n, i);
+                t instanceof RegExp ? s = RegExp : (s = c.origin || self.location.origin, s = s instanceof RegExp ? s.source : r(s)), e = e.toLowerCase();
+                var a = new o(e, t, n, c);
                 this.routes.has(s) || this.routes.set(s, new Map);
-                var a = this.routes.get(s);
-                a.has(e) || a.set(e, new Map);
-                var u = a.get(e),
-                    f = c.regexp || c.fullUrlRegExp;
-                u.has(f.source) && o.debug('"' + t + '" resolves to same regex as existing route.'), u.set(f.source, c)
+                var u = this.routes.get(s);
+                u.has(e) || u.set(e, new Map);
+                var f = u.get(e),
+                    h = a.regexp || a.fullUrlRegExp;
+                f.has(h.source) && i.debug('"' + t + '" resolves to same regex as existing route.'), f.set(h.source, a)
             }, s.prototype.matchMethod = function(e, t) {
                 var n = new URL(t),
                     r = n.origin,
                     o = n.pathname;
-                return this._match(e, i(this.routes, r), o) || this._match(e, [this.routes.get(RegExp)], t)
+                return this._match(e, c(this.routes, r), o) || this._match(e, [this.routes.get(RegExp)], t)
             }, s.prototype._match = function(e, t, n) {
                 if (0 === t.length) return null;
                 for (var r = 0; r < t.length; r++) {
                     var o = t[r],
-                        s = o && o.get(e.toLowerCase());
-                    if (s) {
-                        var c = i(s, n);
-                        if (c.length > 0) return c[0].makeHandler(n)
+                        i = o && o.get(e.toLowerCase());
+                    if (i) {
+                        var s = c(i, n);
+                        if (s.length > 0) return s[0].makeHandler(n)
                     }
                 }
                 return null
@@ -338,57 +391,65 @@
         }],
         7: [function(e, t, n) {
             "use strict";
-            var r = e("../options"),
-                o = e("../helpers");
-            t.exports = function(e, t, n) {
-                var i = (n = n || {}).cache || r.cache,
-                    s = i.queryOptions;
-                return o.debug("Strategy: cache first [" + e.url + "]", n), o.openCache(n).then(function(t) {
-                    return t.match(e, s).then(function(t) {
-                        var r = Date.now();
-                        return o.isResponseFresh(t, i.maxAgeSeconds, r) ? t : o.fetchAndCache(e, n)
+
+            function r(e, t, n) {
+                n = n || {};
+                var r = n.cache || o.cache,
+                    c = r.queryOptions;
+                return i.debug("Strategy: cache first [" + e.url + "]", n), i.openCache(n).then(function(t) {
+                    return t.match(e, c).then(function(t) {
+                        var o = Date.now();
+                        return i.isResponseFresh(t, r.maxAgeSeconds, o) ? t : i.fetchAndCache(e, n)
                     })
                 })
             }
+            var o = e("../options"),
+                i = e("../helpers");
+            t.exports = r
         }, {
             "../helpers": 1,
             "../options": 4
         }],
         8: [function(e, t, n) {
             "use strict";
-            var r = e("../options"),
-                o = e("../helpers");
-            t.exports = function(e, t, n) {
-                var i = (n = n || {}).cache || r.cache,
-                    s = i.queryOptions;
-                return o.debug("Strategy: cache only [" + e.url + "]", n), o.openCache(n).then(function(t) {
-                    return t.match(e, s).then(function(e) {
+
+            function r(e, t, n) {
+                n = n || {};
+                var r = n.cache || o.cache,
+                    c = r.queryOptions;
+                return i.debug("Strategy: cache only [" + e.url + "]", n), i.openCache(n).then(function(t) {
+                    return t.match(e, c).then(function(e) {
                         var t = Date.now();
-                        if (o.isResponseFresh(e, i.maxAgeSeconds, t)) return e
+                        if (i.isResponseFresh(e, r.maxAgeSeconds, t)) return e
                     })
                 })
             }
+            var o = e("../options"),
+                i = e("../helpers");
+            t.exports = r
         }, {
             "../helpers": 1,
             "../options": 4
         }],
         9: [function(e, t, n) {
             "use strict";
-            var r = e("../helpers"),
-                o = e("./cacheOnly");
-            t.exports = function(e, t, n) {
-                return r.debug("Strategy: fastest [" + e.url + "]", n), new Promise(function(i, s) {
-                    var c = !1,
+
+            function r(e, t, n) {
+                return o.debug("Strategy: fastest [" + e.url + "]", n), new Promise(function(r, c) {
+                    var s = !1,
                         a = [],
                         u = function(e) {
-                            a.push(e.toString()), c ? s(new Error('Both cache and network failed: "' + a.join('", "') + '"')) : c = !0
+                            a.push(e.toString()), s ? c(new Error('Both cache and network failed: "' + a.join('", "') + '"')) : s = !0
                         },
                         f = function(e) {
-                            e instanceof Response ? i(e) : u("No result returned")
+                            e instanceof Response ? r(e) : u("No result returned")
                         };
-                    r.fetchAndCache(e.clone(), n).then(f, u), o(e, t, n).then(f, u)
+                    o.fetchAndCache(e.clone(), n).then(f, u), i(e, t, n).then(f, u)
                 })
             }
+            var o = e("../helpers"),
+                i = e("./cacheOnly");
+            t.exports = r
         }, {
             "../helpers": 1,
             "./cacheOnly": 8
@@ -410,32 +471,32 @@
         }],
         11: [function(e, t, n) {
             "use strict";
-            var r = e("../options"),
-                o = e("../helpers");
-            t.exports = function(e, t, n) {
-                var i = (n = n || {}).cache || r.cache,
-                    s = i.queryOptions,
-                    c = n.successResponses || r.successResponses,
-                    a = n.networkTimeoutSeconds || r.networkTimeoutSeconds;
-                return o.debug("Strategy: network first [" + e.url + "]", n), o.openCache(n).then(function(t) {
-                    var r, u, f = [];
+
+            function r(e, t, n) {
+                n = n || {};
+                var r = n.cache || o.cache,
+                    c = r.queryOptions,
+                    s = n.successResponses || o.successResponses,
+                    a = n.networkTimeoutSeconds || o.networkTimeoutSeconds;
+                return i.debug("Strategy: network first [" + e.url + "]", n), i.openCache(n).then(function(t) {
+                    var o, u, f = [];
                     if (a) {
                         var h = new Promise(function(n) {
-                            r = setTimeout(function() {
-                                t.match(e, s).then(function(e) {
+                            o = setTimeout(function() {
+                                t.match(e, c).then(function(e) {
                                     var t = Date.now(),
-                                        r = i.maxAgeSeconds;
-                                    o.isResponseFresh(e, r, t) && n(e)
+                                        o = r.maxAgeSeconds;
+                                    i.isResponseFresh(e, o, t) && n(e)
                                 })
                             }, 1e3 * a)
                         });
                         f.push(h)
                     }
-                    var p = o.fetchAndCache(e, n).then(function(e) {
-                        if (r && clearTimeout(r), c.test(e.status)) return e;
-                        throw o.debug("Response was an HTTP error: " + e.statusText, n), u = e, new Error("Bad response")
+                    var p = i.fetchAndCache(e, n).then(function(e) {
+                        if (o && clearTimeout(o), s.test(e.status)) return e;
+                        throw i.debug("Response was an HTTP error: " + e.statusText, n), u = e, new Error("Bad response")
                     }).catch(function(r) {
-                        return o.debug("Network or response error, fallback to cache [" + e.url + "]", n), t.match(e, s).then(function(e) {
+                        return i.debug("Network or response error, fallback to cache [" + e.url + "]", n), t.match(e, c).then(function(e) {
                             if (e) return e;
                             if (u) return u;
                             throw r
@@ -444,16 +505,21 @@
                     return f.push(p), Promise.race(f)
                 })
             }
+            var o = e("../options"),
+                i = e("../helpers");
+            t.exports = r
         }, {
             "../helpers": 1,
             "../options": 4
         }],
         12: [function(e, t, n) {
             "use strict";
-            var r = e("../helpers");
-            t.exports = function(e, t, n) {
-                return r.debug("Strategy: network only [" + e.url + "]", n), fetch(e)
+
+            function r(e, t, n) {
+                return o.debug("Strategy: network only [" + e.url + "]", n), fetch(e)
             }
+            var o = e("../helpers");
+            t.exports = r
         }, {
             "../helpers": 1
         }],
@@ -462,14 +528,14 @@
             var r = e("./options"),
                 o = e("./router"),
                 i = e("./helpers"),
-                s = e("./strategies"),
-                c = e("./listeners");
-            i.debug("Service Worker Toolbox is loading"), self.addEventListener("install", c.installListener), self.addEventListener("activate", c.activateListener), self.addEventListener("fetch", c.fetchListener), t.exports = {
-                networkOnly: s.networkOnly,
-                networkFirst: s.networkFirst,
-                cacheOnly: s.cacheOnly,
-                cacheFirst: s.cacheFirst,
-                fastest: s.fastest,
+                c = e("./strategies"),
+                s = e("./listeners");
+            i.debug("Service Worker Toolbox is loading"), self.addEventListener("install", s.installListener), self.addEventListener("activate", s.activateListener), self.addEventListener("fetch", s.fetchListener), t.exports = {
+                networkOnly: c.networkOnly,
+                networkFirst: c.networkFirst,
+                cacheOnly: c.cacheOnly,
+                cacheFirst: c.cacheFirst,
+                fastest: c.fastest,
                 router: o,
                 options: r,
                 cache: i.cache,
@@ -490,137 +556,153 @@
         }, {}],
         15: [function(e, t, n) {
             function r(e, t) {
-                for (var n, r = [], o = 0, i = 0, c = "", a = t && t.delimiter || "/"; null != (n = p.exec(e));) {
-                    var u = n[0],
-                        f = n[1],
-                        h = n.index;
-                    if (c += e.slice(i, h), i = h + u.length, f) c += f[1];
+                for (var n, r = [], o = 0, i = 0, c = "", s = t && t.delimiter || "/"; null != (n = x.exec(e));) {
+                    var f = n[0],
+                        h = n[1],
+                        p = n.index;
+                    if (c += e.slice(i, p), i = p + f.length, h) c += h[1];
                     else {
                         var l = e[i],
                             d = n[2],
                             m = n[3],
                             g = n[4],
                             v = n[5],
-                            x = n[6],
-                            w = n[7];
+                            w = n[6],
+                            y = n[7];
                         c && (r.push(c), c = "");
-                        var y = null != d && null != l && l !== d,
-                            b = "+" === x || "*" === x,
-                            E = "?" === x || "*" === x,
-                            R = n[2] || a,
-                            k = g || v;
+                        var b = null != d && null != l && l !== d,
+                            E = "+" === w || "*" === w,
+                            R = "?" === w || "*" === w,
+                            k = n[2] || s,
+                            $ = g || v;
                         r.push({
                             name: m || o++,
                             prefix: d || "",
-                            delimiter: R,
-                            optional: E,
-                            repeat: b,
-                            partial: y,
-                            asterisk: !!w,
-                            pattern: k ? ($ = k, $.replace(/([=!:$\/()])/g, "\\$1")) : w ? ".*" : "[^" + s(R) + "]+?"
+                            delimiter: k,
+                            optional: R,
+                            repeat: E,
+                            partial: b,
+                            asterisk: !!y,
+                            pattern: $ ? u($) : y ? ".*" : "[^" + a(k) + "]+?"
                         })
                     }
                 }
-                var $;
                 return i < e.length && (c += e.substr(i)), c && r.push(c), r
             }
 
-            function o(e) {
+            function o(e, t) {
+                return s(r(e, t))
+            }
+
+            function i(e) {
                 return encodeURI(e).replace(/[\/?#]/g, function(e) {
                     return "%" + e.charCodeAt(0).toString(16).toUpperCase()
                 })
             }
 
-            function i(e) {
-                for (var t = new Array(e.length), n = 0; n < e.length; n++) "object" == typeof e[n] && (t[n] = new RegExp("^(?:" + e[n].pattern + ")$"));
-                return function(n, r) {
-                    for (var i = "", s = n || {}, c = (r || {}).pretty ? o : encodeURIComponent, a = 0; a < e.length; a++) {
-                        var u = e[a];
-                        if ("string" != typeof u) {
-                            var f, p = s[u.name];
-                            if (null == p) {
-                                if (u.optional) {
-                                    u.partial && (i += u.prefix);
-                                    continue
-                                }
-                                throw new TypeError('Expected "' + u.name + '" to be defined')
-                            }
-                            if (h(p)) {
-                                if (!u.repeat) throw new TypeError('Expected "' + u.name + '" to not repeat, but received `' + JSON.stringify(p) + "`");
-                                if (0 === p.length) {
-                                    if (u.optional) continue;
-                                    throw new TypeError('Expected "' + u.name + '" to not be empty')
-                                }
-                                for (var l = 0; l < p.length; l++) {
-                                    if (f = c(p[l]), !t[a].test(f)) throw new TypeError('Expected all "' + u.name + '" to match "' + u.pattern + '", but received `' + JSON.stringify(f) + "`");
-                                    i += (0 === l ? u.prefix : u.delimiter) + f
-                                }
-                            } else {
-                                if (f = u.asterisk ? encodeURI(p).replace(/[?#]/g, function(e) {
-                                        return "%" + e.charCodeAt(0).toString(16).toUpperCase()
-                                    }) : c(p), !t[a].test(f)) throw new TypeError('Expected "' + u.name + '" to match "' + u.pattern + '", but received "' + f + '"');
-                                i += u.prefix + f
-                            }
-                        } else i += u
-                    }
-                    return i
-                }
+            function c(e) {
+                return encodeURI(e).replace(/[?#]/g, function(e) {
+                    return "%" + e.charCodeAt(0).toString(16).toUpperCase()
+                })
             }
 
             function s(e) {
-                return e.replace(/([.+*?=^!:${}()[\]|\/\\])/g, "\\$1")
-            }
-
-            function c(e, t) {
-                return e.keys = t, e
+                for (var t = new Array(e.length), n = 0; n < e.length; n++) "object" == typeof e[n] && (t[n] = new RegExp("^(?:" + e[n].pattern + ")$"));
+                return function(n, r) {
+                    for (var o = "", s = n || {}, a = r || {}, u = a.pretty ? i : encodeURIComponent, f = 0; f < e.length; f++) {
+                        var h = e[f];
+                        if ("string" != typeof h) {
+                            var p, l = s[h.name];
+                            if (null == l) {
+                                if (h.optional) {
+                                    h.partial && (o += h.prefix);
+                                    continue
+                                }
+                                throw new TypeError('Expected "' + h.name + '" to be defined')
+                            }
+                            if (v(l)) {
+                                if (!h.repeat) throw new TypeError('Expected "' + h.name + '" to not repeat, but received `' + JSON.stringify(l) + "`");
+                                if (0 === l.length) {
+                                    if (h.optional) continue;
+                                    throw new TypeError('Expected "' + h.name + '" to not be empty')
+                                }
+                                for (var d = 0; d < l.length; d++) {
+                                    if (p = u(l[d]), !t[f].test(p)) throw new TypeError('Expected all "' + h.name + '" to match "' + h.pattern + '", but received `' + JSON.stringify(p) + "`");
+                                    o += (0 === d ? h.prefix : h.delimiter) + p
+                                }
+                            } else {
+                                if (p = h.asterisk ? c(l) : u(l), !t[f].test(p)) throw new TypeError('Expected "' + h.name + '" to match "' + h.pattern + '", but received "' + p + '"');
+                                o += h.prefix + p
+                            }
+                        } else o += h
+                    }
+                    return o
+                }
             }
 
             function a(e) {
+                return e.replace(/([.+*?=^!:${}()[\]|\/\\])/g, "\\$1")
+            }
+
+            function u(e) {
+                return e.replace(/([=!:$\/()])/g, "\\$1")
+            }
+
+            function f(e, t) {
+                return e.keys = t, e
+            }
+
+            function h(e) {
                 return e.sensitive ? "" : "i"
             }
 
-            function u(e, t, n) {
-                h(t) || (n = t || n, t = []);
-                for (var r = (n = n || {}).strict, o = !1 !== n.end, i = "", u = 0; u < e.length; u++) {
-                    var f = e[u];
-                    if ("string" == typeof f) i += s(f);
-                    else {
-                        var p = s(f.prefix),
-                            l = "(?:" + f.pattern + ")";
-                        t.push(f), f.repeat && (l += "(?:" + p + l + ")*"), i += l = f.optional ? f.partial ? p + "(" + l + ")?" : "(?:" + p + "(" + l + "))?" : p + "(" + l + ")"
-                    }
-                }
-                var d = s(n.delimiter || "/"),
-                    m = i.slice(-d.length) === d;
-                return r || (i = (m ? i.slice(0, -d.length) : i) + "(?:" + d + "(?=$))?"), i += o ? "$" : r && m ? "" : "(?=" + d + "|$)", c(new RegExp("^" + i, a(n)), t)
+            function p(e, t) {
+                var n = e.source.match(/\((?!\?)/g);
+                if (n)
+                    for (var r = 0; r < n.length; r++) t.push({
+                        name: r,
+                        prefix: null,
+                        delimiter: null,
+                        optional: !1,
+                        repeat: !1,
+                        partial: !1,
+                        asterisk: !1,
+                        pattern: null
+                    });
+                return f(e, t)
             }
 
-            function f(e, t, n) {
-                return h(t) || (n = t || n, t = []), n = n || {}, e instanceof RegExp ? function(e, t) {
-                    var n = e.source.match(/\((?!\?)/g);
-                    if (n)
-                        for (var r = 0; r < n.length; r++) t.push({
-                            name: r,
-                            prefix: null,
-                            delimiter: null,
-                            optional: !1,
-                            repeat: !1,
-                            partial: !1,
-                            asterisk: !1,
-                            pattern: null
-                        });
-                    return c(e, t)
-                }(e, t) : h(e) ? function(e, t, n) {
-                    for (var r = [], o = 0; o < e.length; o++) r.push(f(e[o], t, n).source);
-                    return c(new RegExp("(?:" + r.join("|") + ")", a(n)), t)
-                }(e, t, n) : (o = t, u(r(e, i = n), o, i));
-                var o, i
+            function l(e, t, n) {
+                for (var r = [], o = 0; o < e.length; o++) r.push(g(e[o], t, n).source);
+                return f(new RegExp("(?:" + r.join("|") + ")", h(n)), t)
             }
-            var h = e("isarray");
-            t.exports = f, t.exports.parse = r, t.exports.compile = function(e, t) {
-                return i(r(e, t))
-            }, t.exports.tokensToFunction = i, t.exports.tokensToRegExp = u;
-            var p = new RegExp(["(\\\\.)", "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))"].join("|"), "g")
+
+            function d(e, t, n) {
+                return m(r(e, n), t, n)
+            }
+
+            function m(e, t, n) {
+                v(t) || (n = t || n, t = []), n = n || {};
+                for (var r = n.strict, o = !1 !== n.end, i = "", c = 0; c < e.length; c++) {
+                    var s = e[c];
+                    if ("string" == typeof s) i += a(s);
+                    else {
+                        var u = a(s.prefix),
+                            p = "(?:" + s.pattern + ")";
+                        t.push(s), s.repeat && (p += "(?:" + u + p + ")*"), p = s.optional ? s.partial ? u + "(" + p + ")?" : "(?:" + u + "(" + p + "))?" : u + "(" + p + ")", i += p
+                    }
+                }
+                var l = a(n.delimiter || "/"),
+                    d = i.slice(-l.length) === l;
+                return r || (i = (d ? i.slice(0, -l.length) : i) + "(?:" + l + "(?=$))?"), i += o ? "$" : r && d ? "" : "(?=" + l + "|$)", f(new RegExp("^" + i, h(n)), t)
+            }
+
+            function g(e, t, n) {
+                return v(t) || (n = t || n, t = []), n = n || {}, e instanceof RegExp ? p(e, t) : v(e) ? l(e, t, n) : d(e, t, n)
+            }
+            var v = e("isarray");
+            t.exports = g, t.exports.parse = r, t.exports.compile = o, t.exports.tokensToFunction = s, t.exports.tokensToRegExp = m;
+            var x = new RegExp(["(\\\\.)", "([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))"].join("|"), "g")
         }, {
             isarray: 14
         }],
