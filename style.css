@@ -1,18 +1,16 @@
 body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
 p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px; margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
-p,.btn,#geolocation,#localNotifications{text-align: center;}
+p,.btn,#geolocation,#localNotifications, #officeStorage div:nth-child(1){text-align: center;}
 p,.btn{line-height: 50px;}
-#geolocation div{width:auto;}
 #officeStorage{height:260px !important;}
-#officeStorage p:nth-child(2){line-height:25px;}
-#officeStorage div:nth-child(1){text-align:center;}
 #officeStorage .btn-group button{width:49.5% !important; outline:none;}
-#officeStorage .btn-group,#officeStorage p{width:auto !important;}
-.container { perspective:300; -webkit-perspective:300;}
+#officeStorage .btn-group,#officeStorage p, #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
+#localNotifications button{height:auto;}
+.container {perspective:300; -webkit-perspective:300;}
 #imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
-.battery,#officeStorage .btn-group button{line-height: 25px;}
+.battery,#officeStorage .btn-group button, #officeStorage p:nth-child(2){line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
 @media screen and (max-width:600px){
 	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
