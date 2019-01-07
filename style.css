@@ -1,7 +1,6 @@
 body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
-p,.btn,#officeStorage,#geolocation{width: 500px;}
-p,.btn,#officeStorage,#localNotifications{margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px; margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
 p,.btn,#geolocation,#localNotifications{text-align: center;}
 p,.btn{line-height: 50px;}
 #geolocation div{width:auto;}
@@ -16,7 +15,7 @@ p,.btn{line-height: 50px;}
 .battery,#officeStorage .btn-group button{line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
 @media screen and (max-width:600px){
-	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
+	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#officeStorage .btn-group button{width:41% !important;}
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
