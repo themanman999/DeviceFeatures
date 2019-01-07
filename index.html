@@ -58,6 +58,7 @@ p,.btn{line-height: 50px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
 .battery,#officeStorage .btn-group button, #officeStorage p:nth-child(2){line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
+#footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
 	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#officeStorage .btn-group button{width:41% !important;}
@@ -65,6 +66,7 @@ p,.btn{line-height: 50px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
 	#DeviceMotion > div{display:-webkit-box;}
+	#DeviceMotion > div:nth-child(1){text-align:center; width:fit-content; margin:10px auto;}
 	#DeviceMotion > div > div{width:50%;}
 	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
@@ -124,6 +126,7 @@ p,.btn{line-height: 50px;}
         <div class="btn" id="getGeolocation">Ask for location</div>
       </div>
       <div id="DeviceMotion">
+        <div>Device Motion</div>
         <div>
           <div>Tilt Left/Right [gamma]</div>
           <div id="doTiltLR"></div>
@@ -158,7 +161,7 @@ p,.btn{line-height: 50px;}
         </div>
         <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5"/></div>
       </div>
-      <p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></p>
+      <p id="footer"><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></p>
       <script type="text/javascript" src="./networkState.js"></script>
       <script type="text/javascript" src="./networkSpeed.js"></script>
       <script type="text/javascript" src="./batteryStatus.js"></script>

@@ -12,6 +12,7 @@ p,.btn{line-height: 50px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
 .battery,#officeStorage .btn-group button, #officeStorage p:nth-child(2){line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
+#footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
 	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#officeStorage .btn-group button{width:41% !important;}
@@ -19,6 +20,7 @@ p,.btn{line-height: 50px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
 	#DeviceMotion > div{display:-webkit-box;}
+	#DeviceMotion > div:nth-child(1){text-align:center; width:fit-content; margin:10px auto;}
 	#DeviceMotion > div > div{width:50%;}
 	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
