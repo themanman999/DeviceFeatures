@@ -1,21 +1,4 @@
 -
-	var iconArr = [
-		['16x16','icons/icon_16.png'],
-		['48x48','icons/icon_48.png'],
-		['57x57','icons/icon_57.png'],
-		['60x60','icons/icon_60.png'],
-		['72x72','icons/icon_72.png'],
-		['76x76','icons/icon_76.png'],
-		['96x96','icons/icon_96.png'],
-		['114x114','icons/icon_114.png'],
-		['120x120','icons/icon_120.png'],
-		['144x144','icons/icon_144.png'],
-		['152x152','icons/icon_152.png'],
-		['180x180','icons/icon_180.png'],
-		['192x192','icons/icon_192.png'],
-		['512x512','icons/icon_512.png']
-	]
--
 	var deviceArray = [
 		['Tilt Left/Right [gamma]','doTiltLR'],
 		['Tilt Front/Back [beta]','doTiltFB'],
@@ -26,10 +9,6 @@
 		['rotation rate','moRotation'],
 		['interval (ms)','moInterval']
 	]
-mixin linkTag(rel,href,type,sizes)
-	each item, i in iconArr
-		link(rel='icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
-		link(rel='apple-touch-icon', type='image/png', sizes= iconArr[i][0], href= iconArr[i][1])
 mixin pTag(string, idName, isUnknown)
 	p= string
 		b(id=idName)= isUnknown===0 ? 'unknown' : 'not available'
@@ -46,10 +25,7 @@ doctype
 html(lang='en')
 	head
 		title Device Fearture
-		meta(name='viewport', content='width=device-width', initial-scale='1', shrink-to-fit='no')
 		include meta
-		+linkTag
-		link(rel='manifest', href='manifest.json')
 		script(type='text/javascript' src='./vibration.js')
 		style
 			include style.css
@@ -92,7 +68,7 @@ html(lang='en')
 				p
 					label(for='value') Value for 
 						code myKey
-						input.form-control#value(type='text')
+					input.form-control#value(type='text')
 				p Open the example in another tab and change the value there to see the synchronization via 
 					code storage
 					|  event.

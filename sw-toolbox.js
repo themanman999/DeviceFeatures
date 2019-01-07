@@ -44,8 +44,7 @@
             function i(e, t) {
                 t = t || {};
                 var n = t.successResponses || m.successResponses;
-                return fetch(e.clone()).then(function(r) {                    
-                    console.log(e.clone());
+                return fetch(e.clone()).then(function(r) {
                     return "GET" === e.method && n.test(r.status) && o(t).then(function(n) {
                         n.put(e, r).then(function() {
                             var r = t.cache || m.cache;
