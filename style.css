@@ -1,7 +1,8 @@
 body{margin: 0 auto;}
 p,.btn,#officeStorage{height: 50px;}
-p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px;margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
-p,.btn,#geolocation{text-align: center;}
+p,.btn,#officeStorage,#geolocation{width: 500px;}
+p,.btn,#officeStorage,#localNotification{margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
+p,.btn,#geolocation,#localNotification{text-align: center;}
 p,.btn{line-height: 50px;}
 #geolocation div{width:auto;}
 #officeStorage{height:260px !important;}
