@@ -49,19 +49,22 @@ html(lang='en')
 				b#level unknown
 				|.
 			#BatteryStatus
-			p Your device memory is 
-				b#result unknown
-				|  Gib.
-			p Estimated storage usage is 
-				b#usage unknown
-				|  bytes.
-			p Estimated storage quota is 
-				b#quota unknown
-				|  bytes.
-			p Estimated usage is 
-				b#percent unknown
-				|  %.
-			div#localNotifications Local Notifications
+			div#deviceMemory
+				div Device Memory
+				div Your device memory is 
+					b#result unknown
+					|  Gib.
+				div Estimated storage usage is 
+					b#usage unknown
+					|  bytes.
+				div Estimated storage quota is 
+					b#quota unknown
+					|  bytes.
+				div Estimated usage is 
+					b#percent unknown
+					|  %.
+			div#localNotifications 
+				div Local Notifications
 				div Current permission status is 
 					|
 					b#noticeStatus unavailable

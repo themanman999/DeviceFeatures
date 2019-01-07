@@ -45,23 +45,21 @@
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
-p,.btn,#officeStorage{height: 50px;}
-p,.btn,#officeStorage,#geolocation,#localNotifications{width: 500px; margin: 10px auto; padding: 5px; border: 1px solid; border-radius: 5px;}
-p,.btn,#geolocation,#localNotifications, #officeStorage div:nth-child(1){text-align: center;}
+p,.btn,{height: 50px;}
+p,.btn,#geolocation,#localNotifications,#deviceMemory{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+p,.btn,#geolocation,#localNotifications,#deviceMemory{text-align: center;}
+#deviceMemory > div:nth-child(1), #localNotifications > div:nth-child(1){margin:10px auto;}
 p,.btn{line-height: 50px;}
-#officeStorage{height:260px !important;}
-#officeStorage .btn-group button{width:49.5% !important; outline:none;}
-#officeStorage .btn-group,#officeStorage p, #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
+#geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button{height:auto;}
-.container {perspective:300; -webkit-perspective:300;}
-#imgLogo { width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
+.container{perspective:300; -webkit-perspective:300;}
+#imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
-.battery,#officeStorage .btn-group button, #officeStorage p:nth-child(2){line-height: 25px;}
+.battery{line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,#officeStorage,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
-	#officeStorage .btn-group button{width:41% !important;}
+	p, .btn,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
@@ -71,7 +69,6 @@ p,.btn{line-height: 50px;}
 	#DeviceMotion img{width:200px !important; height:200px !important;}
 }
 @media screen and (max-width:480px){
-	#officeStorage .btn-group button{width:40% !important; font-size:small !important;}	
 	#vibration div:not(:nth-child(1)){width:36% !important; font-size:small !important;}
 	#localNotifications button{width:33% !important; line-height:25px;}
 	#localNotifications button:nth-child(1){width:50% !important;}
@@ -104,11 +101,15 @@ p,.btn{line-height: 50px;}
       <p>Current max downlink speed is <b id="downlinkMax">unknown</b>.</p>
       <p class="battery">Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time  <b id="dischargingTime">unknown</b>, level<b id="level">unknown</b>.</p>
       <div id="BatteryStatus"></div>
-      <p>Your device memory is <b id="result">unknown</b> Gib.</p>
-      <p>Estimated storage usage is <b id="usage">unknown</b> bytes.</p>
-      <p>Estimated storage quota is <b id="quota">unknown</b> bytes.</p>
-      <p>Estimated usage is <b id="percent">unknown</b> %.</p>
-      <div id="localNotifications">Local Notifications
+      <div id="deviceMemory">
+        <div>Device Memory</div>
+        <div>Your device memory is <b id="result">unknown</b> Gib.</div>
+        <div>Estimated storage usage is <b id="usage">unknown</b> bytes.</div>
+        <div>Estimated storage quota is <b id="quota">unknown</b> bytes.</div>
+        <div>Estimated usage is <b id="percent">unknown</b> %.</div>
+      </div>
+      <div id="localNotifications"> 
+        <div>Local Notifications</div>
         <div>
           Current permission status is <b id="noticeStatus">unavailable</b>.</div>
         <div>
