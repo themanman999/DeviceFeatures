@@ -39,16 +39,21 @@ html(lang='en')
 			+pTag('Current theoretical network type is ','networkType', 1)
 			+pTag('Current effective network type is ','effectiveNetworkType', 1)
 			+pTag('Current max downlink speed is ','downlinkMax', 0)
-			p.battery Initial battery status was 
-				b#charging unknown
-				|, charging time 
-				b#chargingTime unknown
-				|, discharging time  
-				b#dischargingTime unknown
-				|, level
-				b#level unknown
-				|.
-			#BatteryStatus
+			div#batteryStatus
+				div Battery Status
+				div.battery Initial battery status was 
+					b#charging unknown
+					|,
+				div charging time 
+					b#chargingTime unknown
+					|,
+				div discharging time  
+					b#dischargingTime unknown
+					|,
+				div level
+					b#level unknown
+					|.
+				#batteryUpdate
 			div#deviceMemory
 				div Device Memory
 				div Your device memory is 

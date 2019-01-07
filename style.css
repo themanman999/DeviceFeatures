@@ -1,19 +1,18 @@
 body{margin: 0 auto;}
 p,.btn,{height: 50px;}
-p,.btn,#geolocation,#localNotifications,#deviceMemory{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-p,.btn,#geolocation,#localNotifications,#deviceMemory{text-align: center;}
-#deviceMemory > div:nth-child(1), #localNotifications > div:nth-child(1){margin:10px auto;}
+p,.btn,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+p,.btn,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{text-align: center;}
+#deviceMemory > div:nth-child(1), #localNotifications > div:nth-child(1), #batteryStatus > div:nth-child(1){margin:10px auto;}
 p,.btn{line-height: 50px;}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
-#localNotifications button{height:auto;}
+#localNotifications button,#batteryStatus div{height:auto;}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
-.battery{line-height: 25px;}
 #vibration,#DeviceMotion{display:none;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,#geolocation,#vibration,#DeviceMotion,#localNotifications{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
+	p, .btn,#geolocation,#vibration,#DeviceMotion,#localNotifications,#deviceMemory,#batteryStatus{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
