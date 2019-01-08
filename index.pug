@@ -34,9 +34,11 @@ html(lang='en')
 			include swScript.js
 	body
 		main
+			div#title
+				div This is what HTML5 can do on mobile device
 			div#onlineStatus 
 				div Online Status
-				+pTag('Initial connectio state was ','isOnline', 0)
+				+pTag('Initial connection state was ','isOnline', 0)
 				#networkState
 			div#networkTypeSpeed
 				div Network Type & Speed
@@ -54,7 +56,7 @@ html(lang='en')
 				div discharging time  
 					b#dischargingTime unknown
 					|,
-				div level
+				div Battery level 
 					b#level unknown
 					|.
 				#batteryUpdate
@@ -72,15 +74,46 @@ html(lang='en')
 				div Estimated usage is 
 					b#percent unknown
 					|  %.
+			div#permission
+				div Permissions
+					div Geolocation   
+						button#geolocation-status(onlick='requestGeolocation()') unknown
+						|.
+					div Notifications
+						button#notifications-status(onclick="requestNotifications()") unknown
+						|.
+					div Push
+						button#push-status(onclick="requestPush()") unknown
+						|.
+					div Midi
+						button#midi-status(onclick="requestMidi()") unknown
+						|.	
+					div Camera
+						button#camera-status(onclick="requestCamera()") unknown
+						|.	
+					div Microphone
+						button#microphone-status(onclick="requestMicrophone()") unknown
+						|.		
+					div Background Sync 
+						b#background-sync-status unknown
+						|.		
+					div Ambient Light Sensor 
+						b#ambient-light-sensor-status unknown
+						|.			
+					div Accelerometer 
+						b#accelerometer-status unknown
+						|.			
+					div Gyroscope 
+						b#gyroscope-status unknown
+						|.				
+					div Magnetometer 
+						b#magnetometer-status unknown
+						|.		
+					div#logTarget
 			div#localNotifications 
 				div Local Notifications
-				div Current permission status is 
-					|
-					b#noticeStatus unavailable
-					|.
 				div
 					|
-					button.btn.btn-default(onclick="requestPermission()") Request premission
 					button.btn.btn-default(onclick="nonPersistentNotification()") Non-persistent notification
 					button.btn.btn-default(onclick="persistentNotification()") Persistent notification
 			div#vibration 
@@ -104,3 +137,4 @@ html(lang='en')
 			script(type='text/javascript' src='./deviceMotion.js')
 			script(type='text/javascript' src='./storageQuotas.js')
 			script(type='text/javascript' src='./localNotification.js')
+			script(type='text/javascript' src='./permissions.js')

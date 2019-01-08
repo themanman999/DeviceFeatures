@@ -46,10 +46,13 @@
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
 div,p,.btn,{height: 50px;}
-p,.btn,#onlineStatus,#networkTypeSpeed,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-p,.btn,#onlineStatus,#networkTypeSpeed,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{text-align: center;}
+p,.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+p,.btn,main > div{text-align: center;}
 main > div > div:nth-child(1){margin:10px auto;}
 p,.btn{line-height: 50px;}
+#title {border:0; margin:0;}
+#title div{font-size:medium; font-weight:bold}
+#onlineStatus{margin:0 15px 15px 15px;}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
 .container{perspective:300; -webkit-perspective:300;}
@@ -58,7 +61,7 @@ p,.btn{line-height: 50px;}
 #vibration,#DeviceMotion{display:none;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,#onlineStatus,#networkTypeSpeed,#geolocation,#vibration,#DeviceMotion,#localNotifications,#deviceMemory,#batteryStatus{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}
+	p, .btn,main > div{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
@@ -93,9 +96,12 @@ p,.btn{line-height: 50px;}
   </head>
   <body>
     <main>
+      <div id="title">
+        <div>This is what HTML5 can do on mobile device</div>
+      </div>
       <div id="onlineStatus"> 
         <div>Online Status</div>
-        <div>Initial connectio state was <b id="isOnline">unknown</b>.</div>
+        <div>Initial connection state was <b id="isOnline">unknown</b>.</div>
         <div id="networkState"></div>
       </div>
       <div id="networkTypeSpeed">
@@ -109,7 +115,7 @@ p,.btn{line-height: 50px;}
         <div class="battery">Initial battery status was <b id="charging">unknown</b>,</div>
         <div>charging time <b id="chargingTime">unknown</b>,</div>
         <div>discharging time  <b id="dischargingTime">unknown</b>,</div>
-        <div>level<b id="level">unknown</b>.</div>
+        <div>Battery level <b id="level">unknown</b>.</div>
         <div id="batteryUpdate"></div>
       </div>
       <div id="deviceMemory">
@@ -119,12 +125,37 @@ p,.btn{line-height: 50px;}
         <div>Estimated storage quota is <b id="quota">unknown</b> bytes.</div>
         <div>Estimated usage is <b id="percent">unknown</b> %.</div>
       </div>
+      <div id="permission">
+        <div>Permissions
+          <div>Geolocation   
+            <button id="geolocation-status" onlick="requestGeolocation()">unknown</button>.
+          </div>
+          <div>Notifications
+            <button id="notifications-status" onclick="requestNotifications()">unknown</button>.
+          </div>
+          <div>Push
+            <button id="push-status" onclick="requestPush()">unknown</button>.
+          </div>
+          <div>Midi
+            <button id="midi-status" onclick="requestMidi()">unknown</button>.	
+          </div>
+          <div>Camera
+            <button id="camera-status" onclick="requestCamera()">unknown</button>.	
+          </div>
+          <div>Microphone
+            <button id="microphone-status" onclick="requestMicrophone()">unknown</button>.		
+          </div>
+          <div>Background Sync <b id="background-sync-status">unknown</b>.		</div>
+          <div>Ambient Light Sensor <b id="ambient-light-sensor-status">unknown</b>.			</div>
+          <div>Accelerometer <b id="accelerometer-status">unknown</b>.			</div>
+          <div>Gyroscope <b id="gyroscope-status">unknown</b>.				</div>
+          <div>Magnetometer <b id="magnetometer-status">unknown</b>.		</div>
+          <div id="logTarget"></div>
+        </div>
+      </div>
       <div id="localNotifications"> 
         <div>Local Notifications</div>
         <div>
-          Current permission status is <b id="noticeStatus">unavailable</b>.</div>
-        <div>
-          <button class="btn btn-default" onclick="requestPermission()">Request premission</button>
           <button class="btn btn-default" onclick="nonPersistentNotification()">Non-persistent notification</button>
           <button class="btn btn-default" onclick="persistentNotification()">Persistent notification</button>
         </div>
@@ -184,6 +215,7 @@ p,.btn{line-height: 50px;}
       <script type="text/javascript" src="./deviceMotion.js"></script>
       <script type="text/javascript" src="./storageQuotas.js"></script>
       <script type="text/javascript" src="./localNotification.js"></script>
+      <script type="text/javascript" src="./permissions.js"></script>
     </main>
   </body>
 </html>

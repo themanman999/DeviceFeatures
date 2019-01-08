@@ -1,20 +1,3 @@
-var $status = document.getElementById('noticeStatus');
-
-if ('Notification' in window) {
-  $status.innerText = Notification.permission;
-}
-
-function requestPermission() {
-  if (!('Notification' in window)) {
-    alert('Notification API not supported!');
-    return;
-  }
-  
-  Notification.requestPermission(function (result) {
-    $status.innerText = result;
-  });
-}
-
 function isNewNotificationSupported() {
     if (!window.Notification || !Notification.requestPermission)
         return false;
