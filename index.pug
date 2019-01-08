@@ -10,7 +10,7 @@
 		['interval (ms)','moInterval']
 	]
 mixin pTag(string, idName, isUnknown)
-	p= string
+	div= string
 		b(id=idName)= isUnknown===0 ? 'unknown' : 'not available'
 		|.
 mixin deviceMotion
@@ -21,7 +21,7 @@ mixin deviceMotion
 				div= deviceArray[i][0]
 				div(id=deviceArray[i][1])
 		.container#logoContainer
-			img#imgLogo(src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png', alt='HTML5')
+			img#imgLogo(src='./images/mario8bit320x320.png', alt='HTML5')
 doctype
 html(lang='en')
 	head
@@ -34,11 +34,15 @@ html(lang='en')
 			include swScript.js
 	body
 		main
-			+pTag('Initial connectio state was ','status', 0)
-			#networkState
-			+pTag('Current theoretical network type is ','networkType', 1)
-			+pTag('Current effective network type is ','effectiveNetworkType', 1)
-			+pTag('Current max downlink speed is ','downlinkMax', 0)
+			div#onlineStatus 
+				div Online Status
+				+pTag('Initial connectio state was ','isOnline', 0)
+				#networkState
+			div#networkTypeSpeed
+				div Network Type & Speed
+				+pTag('Current theoretical network type is ','networkType', 1)
+				+pTag('Current effective network type is ','effectiveNetworkType', 1)
+				+pTag('Current max downlink speed is ','downlinkMax', 0)
 			div#batteryStatus
 				div Battery Status
 				div.battery Initial battery status was 
@@ -83,7 +87,8 @@ html(lang='en')
 				div Vibration
 				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
 				.btn(onclick='vibratePattern()') Vibrate with pattern
-			div#geolocation Geolocation
+			div#geolocation 
+				div Geolocation
 				.btn#getGeolocation Ask for location
 			+deviceMotion
 			p#footer

@@ -45,10 +45,10 @@
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body{margin: 0 auto;}
-p,.btn,{height: 50px;}
-p,.btn,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-p,.btn,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{text-align: center;}
-#deviceMemory > div:nth-child(1), #localNotifications > div:nth-child(1), #batteryStatus > div:nth-child(1){margin:10px auto;}
+div,p,.btn,{height: 50px;}
+p,.btn,#onlineStatus,#networkTypeSpeed,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+p,.btn,#onlineStatus,#networkTypeSpeed,#geolocation,#localNotifications,#deviceMemory,#batteryStatus{text-align: center;}
+main > div > div:nth-child(1){margin:10px auto;}
 p,.btn{line-height: 50px;}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
@@ -58,7 +58,7 @@ p,.btn{line-height: 50px;}
 #vibration,#DeviceMotion{display:none;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,#geolocation,#vibration,#DeviceMotion,#localNotifications,#deviceMemory,#batteryStatus{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}	
+	p, .btn,#onlineStatus,#networkTypeSpeed,#geolocation,#vibration,#DeviceMotion,#localNotifications,#deviceMemory,#batteryStatus{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
@@ -93,11 +93,17 @@ p,.btn{line-height: 50px;}
   </head>
   <body>
     <main>
-      <p>Initial connectio state was <b id="status">unknown</b>.</p>
-      <div id="networkState"></div>
-      <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
-      <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
-      <p>Current max downlink speed is <b id="downlinkMax">unknown</b>.</p>
+      <div id="onlineStatus"> 
+        <div>Online Status</div>
+        <div>Initial connectio state was <b id="isOnline">unknown</b>.</div>
+        <div id="networkState"></div>
+      </div>
+      <div id="networkTypeSpeed">
+        <div>Network Type & Speed</div>
+        <div>Current theoretical network type is <b id="networkType">not available</b>.</div>
+        <div>Current effective network type is <b id="effectiveNetworkType">not available</b>.</div>
+        <div>Current max downlink speed is <b id="downlinkMax">unknown</b>.</div>
+      </div>
       <div id="batteryStatus">
         <div>Battery Status</div>
         <div class="battery">Initial battery status was <b id="charging">unknown</b>,</div>
@@ -128,7 +134,8 @@ p,.btn{line-height: 50px;}
         <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
         <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
       </div>
-      <div id="geolocation">Geolocation
+      <div id="geolocation"> 
+        <div>Geolocation</div>
         <div class="btn" id="getGeolocation">Ask for location</div>
       </div>
       <div id="DeviceMotion">
@@ -165,7 +172,7 @@ p,.btn{line-height: 50px;}
           <div>interval (ms)</div>
           <div id="moInterval"></div>
         </div>
-        <div class="container" id="logoContainer"><img id="imgLogo" src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5"/></div>
+        <div class="container" id="logoContainer"><img id="imgLogo" src="./images/mario8bit320x320.png" alt="HTML5"/></div>
       </div>
       <p id="footer"><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></p>
       <script type="text/javascript" src="./networkState.js"></script>
