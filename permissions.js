@@ -1,5 +1,5 @@
 if ('permissions' in navigator) {
-  var logTarget = document.getElementById('logTarget');
+  var logTarget = document.getElementById('permissionLog');
 
   function handleChange(permissionName, newState) {
     var timeBadge = new Date().toTimeString().split(' ')[0];
@@ -8,7 +8,6 @@ if ('permissions' in navigator) {
 
   function checkPermission(permissionName, descriptor) {
     try {
-      console.log(permissionName);
     navigator.permissions.query(Object.assign({name: permissionName}, descriptor))
       .then(function (permission) {
         document.getElementById(permissionName + '-status').innerHTML = permission.state;
@@ -28,7 +27,6 @@ if ('permissions' in navigator) {
   checkPermission('camera');
   checkPermission('microphone');
   checkPermission('background-sync');
-  checkPermission('ambient-light-sensor');
   checkPermission('accelerometer');
   checkPermission('gyroscope');
   checkPermission('magnetometer');

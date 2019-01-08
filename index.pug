@@ -87,6 +87,7 @@ html(lang='en')
 					|.
 			#permission
 				div Permissions
+				div
 					div Geolocation is 
 						button#geolocation-status(onlick='requestGeolocation()') unknown
 						|.
@@ -117,7 +118,16 @@ html(lang='en')
 					div Magnetometer is 
 						b#magnetometer-status unknown
 						|.		
-					div#logTarget
+					#permissionLog
+			#fullscreen
+				div Full Screen
+				div
+					button#startFull.start Start fullscreen
+					button#exitFull Exit fullscreen
+				div
+					button#startBox.start Fullscreen the green box
+					#box THE BOX
+				#fullLog
 			#payment
 				div Payment
 				button(onclick='donate()') Donate 10€ to What Web Can Do 😉
@@ -130,15 +140,15 @@ html(lang='en')
 				div Local Notifications
 				div
 					|
-					button.btn.btn-default(onclick="nonPersistentNotification()") Non-persistent notification
-					button.btn.btn-default(onclick="persistentNotification()") Persistent notification
+					button(onclick="nonPersistentNotification()") Non-persistent notification
+					button(onclick="persistentNotification()") Persistent notification
 			#vibration 
 				div Vibration
 				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
 				.btn(onclick='vibratePattern()') Vibrate with pattern
 			#geolocation 
 				div Geolocation
-				.btn#getGeolocation Ask for location
+					button#getGeolocation Ask for location
 			+deviceMotion
 			#footer
 				small Demo from 
@@ -156,3 +166,4 @@ html(lang='en')
 			script(type='text/javascript' src='./permissions.js')
 			script(type='text/javascript' src='./foregroundDetection.js')
 			script(type='text/javascript' src='./payment.js')
+			script(type='text/javascript' src='./fullscreen.js')

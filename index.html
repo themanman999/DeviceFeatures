@@ -46,26 +46,29 @@
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body, #title, #onlineStatus{margin: 0 auto;}
-div,.btn,{height: 50px;}
-.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-.btn,main > div{text-align: center;}
+div,{height: 50px;}
+main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+main > div{text-align: center;}
 main > div > div:nth-child(1){margin:10px auto;}
-.btn{line-height: 50px;}
+button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px; line-height: 25px; cursor:pointer; padding:10px 15px;}
 #title {border:0;}
 #title div{font-size:medium; font-weight:bold}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
-#payment button{background:#ccc; border:0; cursor:pointer; padding:10px 15px;}
+#payment button{background:#ccc; border:0; }
 #payment button:hover{background:#eee;transition:0.4s}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
-.btn {background: #ccc; box-shadow: 2px 2px;}
 #vibration,#DeviceMotion{display:none;}
 #localNotifications button{margin:0 10px 15px;}
-#permission button{border:0;}
+#permission button{border:0; line-height:25px; box-shadow:none; padding:0; border-radius:0;}
+#fullscreen button{margin-bottom:10px;}
+#box{width:90px; height:40px; line-height:40px; background-color:green; color:white; text-align:center; display:inline-block; border-radius:5px;}
+#exitFull{display:none;}
+#geolocation button{display:block; margin:0 auto;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
+	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
@@ -137,7 +140,8 @@ main > div > div:nth-child(1){margin:10px auto;}
         <div id="foreDetectLog2"></div><small>Based on demo from  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API">MDN</a>.</small>
       </div>
       <div id="permission">
-        <div>Permissions
+        <div>Permissions</div>
+        <div>
           <div>Geolocation is 
             <button id="geolocation-status" onlick="requestGeolocation()">unknown</button>.
           </div>
@@ -160,8 +164,20 @@ main > div > div:nth-child(1){margin:10px auto;}
           <div>Accelerometer is <b id="accelerometer-status">unknown</b>.			</div>
           <div>Gyroscope is <b id="gyroscope-status">unknown</b>.				</div>
           <div>Magnetometer is <b id="magnetometer-status">unknown</b>.		</div>
-          <div id="logTarget"></div>
+          <div id="permissionLog"></div>
         </div>
+      </div>
+      <div id="fullscreen">
+        <div>Full Screen</div>
+        <div>
+          <button class="start" id="startFull">Start fullscreen</button>
+          <button id="exitFull">Exit fullscreen</button>
+        </div>
+        <div>
+          <button class="start" id="startBox">Fullscreen the green box</button>
+          <div id="box">THE BOX</div>
+        </div>
+        <div id="fullLog"></div>
       </div>
       <div id="payment">
         <div>Payment</div>
@@ -172,8 +188,8 @@ main > div > div:nth-child(1){margin:10px auto;}
       <div id="localNotifications"> 
         <div>Local Notifications</div>
         <div>
-          <button class="btn btn-default" onclick="nonPersistentNotification()">Non-persistent notification</button>
-          <button class="btn btn-default" onclick="persistentNotification()">Persistent notification</button>
+          <button onclick="nonPersistentNotification()">Non-persistent notification</button>
+          <button onclick="persistentNotification()">Persistent notification</button>
         </div>
       </div>
       <div id="vibration"> 
@@ -182,8 +198,9 @@ main > div > div:nth-child(1){margin:10px auto;}
         <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
       </div>
       <div id="geolocation"> 
-        <div>Geolocation</div>
-        <div class="btn" id="getGeolocation">Ask for location</div>
+        <div>Geolocation
+          <button id="getGeolocation">Ask for location</button>
+        </div>
       </div>
       <div id="DeviceMotion">
         <div>Device Motion</div>
@@ -234,6 +251,7 @@ main > div > div:nth-child(1){margin:10px auto;}
       <script type="text/javascript" src="./permissions.js"></script>
       <script type="text/javascript" src="./foregroundDetection.js"></script>
       <script type="text/javascript" src="./payment.js"></script>
+      <script type="text/javascript" src="./fullscreen.js"></script>
     </main>
   </body>
 </html>
