@@ -44,15 +44,14 @@
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="./vibration.js"></script>
-    <style>body{margin: 0 auto;}
+    <style>body, #title, #onlineStatus{margin: 0 auto;}
 div,p,.btn,{height: 50px;}
 p,.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
 p,.btn,main > div{text-align: center;}
 main > div > div:nth-child(1){margin:10px auto;}
 p,.btn{line-height: 50px;}
-#title {border:0; margin:0;}
+#title {border:0;}
 #title div{font-size:medium; font-weight:bold}
-#onlineStatus{margin:0 15px 15px 15px;}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
 .container{perspective:300; -webkit-perspective:300;}
@@ -61,7 +60,7 @@ p,.btn{line-height: 50px;}
 #vibration,#DeviceMotion{display:none;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
-	p, .btn,main > div{width: auto; height: auto !important; margin:15px; padding: 10px 5px;}
+	p, .btn,main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
 	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
