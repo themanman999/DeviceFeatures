@@ -42,22 +42,27 @@
     <meta name="msapplication-TileColor" content="#ccc">
     <meta name="msapplication-TileImage" content="icons/icon_144.png">
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
+    <meta charset="UTF-8">
     <link rel="manifest" href="manifest.json">
     <script type="text/javascript" src="./vibration.js"></script>
     <style>body, #title, #onlineStatus{margin: 0 auto;}
-div,p,.btn,{height: 50px;}
-p,.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-p,.btn,main > div{text-align: center;}
+div,.btn,{height: 50px;}
+.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+.btn,main > div{text-align: center;}
 main > div > div:nth-child(1){margin:10px auto;}
-p,.btn{line-height: 50px;}
+.btn{line-height: 50px;}
 #title {border:0;}
 #title div{font-size:medium; font-weight:bold}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
+#payment button{background:#ccc; border:0; cursor:pointer; padding:10px 15px;}
+#payment button:hover{background:#eee;transition:0.4s}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
 #vibration,#DeviceMotion{display:none;}
+#localNotifications button{margin:0 10px 15px;}
+#permission button{border:0;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
 	p, .btn,main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
@@ -124,33 +129,45 @@ p,.btn{line-height: 50px;}
         <div>Estimated storage quota is <b id="quota">unknown</b> bytes.</div>
         <div>Estimated usage is <b id="percent">unknown</b> %.</div>
       </div>
+      <div id="foregroundDetection">
+        <div>Foreground Detection</div>
+        <div>
+          Initial page visibility was <b id="foreDetect">unknown</b>.</div>
+        <div id="foreDetectLog1"></div>
+        <div id="foreDetectLog2"></div><small>Based on demo from  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API">MDN</a>.</small>
+      </div>
       <div id="permission">
         <div>Permissions
-          <div>Geolocation   
+          <div>Geolocation is 
             <button id="geolocation-status" onlick="requestGeolocation()">unknown</button>.
           </div>
-          <div>Notifications
+          <div>Notifications is 
             <button id="notifications-status" onclick="requestNotifications()">unknown</button>.
           </div>
-          <div>Push
+          <div>Push is 
             <button id="push-status" onclick="requestPush()">unknown</button>.
           </div>
-          <div>Midi
+          <div>Midi is 
             <button id="midi-status" onclick="requestMidi()">unknown</button>.	
           </div>
-          <div>Camera
+          <div>Camera is 
             <button id="camera-status" onclick="requestCamera()">unknown</button>.	
           </div>
-          <div>Microphone
+          <div>Microphone is 
             <button id="microphone-status" onclick="requestMicrophone()">unknown</button>.		
           </div>
-          <div>Background Sync <b id="background-sync-status">unknown</b>.		</div>
-          <div>Ambient Light Sensor <b id="ambient-light-sensor-status">unknown</b>.			</div>
-          <div>Accelerometer <b id="accelerometer-status">unknown</b>.			</div>
-          <div>Gyroscope <b id="gyroscope-status">unknown</b>.				</div>
-          <div>Magnetometer <b id="magnetometer-status">unknown</b>.		</div>
+          <div>Background Sync is <b id="background-sync-status">unknown</b>.				</div>
+          <div>Accelerometer is <b id="accelerometer-status">unknown</b>.			</div>
+          <div>Gyroscope is <b id="gyroscope-status">unknown</b>.				</div>
+          <div>Magnetometer is <b id="magnetometer-status">unknown</b>.		</div>
           <div id="logTarget"></div>
         </div>
+      </div>
+      <div id="payment">
+        <div>Payment</div>
+        <button onclick="donate()">Donate 10€ to What Web Can Do 😉</button>
+        <div>(demo only, no actual payment is processed)</div><small>Demo base on <a href="https://googlechrome.github.io/samples/paymentrequest/credit-cards/">Google Chrome GitHub repository</a>.</small>
+        <div id="paymentLog"></div>
       </div>
       <div id="localNotifications"> 
         <div>Local Notifications</div>
@@ -204,7 +221,7 @@ p,.btn{line-height: 50px;}
         </div>
         <div class="container" id="logoContainer"><img id="imgLogo" src="./images/mario8bit320x320.png" alt="HTML5"/></div>
       </div>
-      <p id="footer"><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></p>
+      <div id="footer"><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></div>
       <script type="text/javascript" src="./networkState.js"></script>
       <script type="text/javascript" src="./networkSpeed.js"></script>
       <script type="text/javascript" src="./batteryStatus.js"></script>
@@ -215,6 +232,8 @@ p,.btn{line-height: 50px;}
       <script type="text/javascript" src="./storageQuotas.js"></script>
       <script type="text/javascript" src="./localNotification.js"></script>
       <script type="text/javascript" src="./permissions.js"></script>
+      <script type="text/javascript" src="./foregroundDetection.js"></script>
+      <script type="text/javascript" src="./payment.js"></script>
     </main>
   </body>
 </html>

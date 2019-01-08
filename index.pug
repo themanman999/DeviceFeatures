@@ -34,18 +34,18 @@ html(lang='en')
 			include swScript.js
 	body
 		main
-			div#title
+			#title
 				div This is what HTML5 can do on mobile device
-			div#onlineStatus 
+			#onlineStatus 
 				div Online Status
 				+pTag('Initial connection state was ','isOnline', 0)
 				#networkState
-			div#networkTypeSpeed
+			#networkTypeSpeed
 				div Network Type & Speed
 				+pTag('Current theoretical network type is ','networkType', 1)
 				+pTag('Current effective network type is ','effectiveNetworkType', 1)
 				+pTag('Current max downlink speed is ','downlinkMax', 0)
-			div#batteryStatus
+			#batteryStatus
 				div Battery Status
 				div.battery Initial battery status was 
 					b#charging unknown
@@ -60,7 +60,7 @@ html(lang='en')
 					b#level unknown
 					|.
 				#batteryUpdate
-			div#deviceMemory
+			#deviceMemory
 				div Device Memory
 				div Your device memory is 
 					b#result unknown
@@ -74,57 +74,73 @@ html(lang='en')
 				div Estimated usage is 
 					b#percent unknown
 					|  %.
-			div#permission
+			#foregroundDetection
+				div Foreground Detection
+				div Initial page visibility was 
+					|
+					b#foreDetect unknown
+					|.
+				div#foreDetectLog1
+				div#foreDetectLog2
+				small Based on demo from  
+					a(href='https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API') MDN
+					|.
+			#permission
 				div Permissions
-					div Geolocation   
+					div Geolocation is 
 						button#geolocation-status(onlick='requestGeolocation()') unknown
 						|.
-					div Notifications
+					div Notifications is 
 						button#notifications-status(onclick="requestNotifications()") unknown
 						|.
-					div Push
+					div Push is 
 						button#push-status(onclick="requestPush()") unknown
 						|.
-					div Midi
+					div Midi is 
 						button#midi-status(onclick="requestMidi()") unknown
 						|.	
-					div Camera
+					div Camera is 
 						button#camera-status(onclick="requestCamera()") unknown
 						|.	
-					div Microphone
+					div Microphone is 
 						button#microphone-status(onclick="requestMicrophone()") unknown
 						|.		
-					div Background Sync 
+					div Background Sync is 
 						b#background-sync-status unknown
-						|.		
-					div Ambient Light Sensor 
-						b#ambient-light-sensor-status unknown
-						|.			
-					div Accelerometer 
+						|.				
+					div Accelerometer is 
 						b#accelerometer-status unknown
 						|.			
-					div Gyroscope 
+					div Gyroscope is 
 						b#gyroscope-status unknown
 						|.				
-					div Magnetometer 
+					div Magnetometer is 
 						b#magnetometer-status unknown
 						|.		
 					div#logTarget
-			div#localNotifications 
+			#payment
+				div Payment
+				button(onclick='donate()') Donate 10€ to What Web Can Do 😉
+				div (demo only, no actual payment is processed)
+				small Demo base on 
+					a(href='https://googlechrome.github.io/samples/paymentrequest/credit-cards/') Google Chrome GitHub repository
+					|.
+				#paymentLog
+			#localNotifications 
 				div Local Notifications
 				div
 					|
 					button.btn.btn-default(onclick="nonPersistentNotification()") Non-persistent notification
 					button.btn.btn-default(onclick="persistentNotification()") Persistent notification
-			div#vibration 
+			#vibration 
 				div Vibration
 				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
 				.btn(onclick='vibratePattern()') Vibrate with pattern
-			div#geolocation 
+			#geolocation 
 				div Geolocation
 				.btn#getGeolocation Ask for location
 			+deviceMotion
-			p#footer
+			#footer
 				small Demo from 
 					a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank', rel='noopener') HTML5 Rocks
 					|  article.
@@ -138,3 +154,5 @@ html(lang='en')
 			script(type='text/javascript' src='./storageQuotas.js')
 			script(type='text/javascript' src='./localNotification.js')
 			script(type='text/javascript' src='./permissions.js')
+			script(type='text/javascript' src='./foregroundDetection.js')
+			script(type='text/javascript' src='./payment.js')

@@ -1,17 +1,21 @@
 body, #title, #onlineStatus{margin: 0 auto;}
-div,p,.btn,{height: 50px;}
-p,.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
-p,.btn,main > div{text-align: center;}
+div,.btn,{height: 50px;}
+.btn,main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
+.btn,main > div{text-align: center;}
 main > div > div:nth-child(1){margin:10px auto;}
-p,.btn{line-height: 50px;}
+.btn{line-height: 50px;}
 #title {border:0;}
 #title div{font-size:medium; font-weight:bold}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
+#payment button{background:#ccc; border:0; cursor:pointer; padding:10px 15px;}
+#payment button:hover{background:#eee;transition:0.4s}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
 .btn {background: #ccc; box-shadow: 2px 2px;}
 #vibration,#DeviceMotion{display:none;}
+#localNotifications button{margin:0 10px 15px;}
+#permission button{border:0;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
 	p, .btn,main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
