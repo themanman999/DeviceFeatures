@@ -74,6 +74,10 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 .dragElement:nth-child(2) {background-image:url(./images/NES_Bowser_5.png); background-size:contain; top:122px; left:246px; width:125px; height:125px;}
 .dragElement:nth-child(3) {background-image:url(./images/mario8bit320x320.png); background-size:contain;top:48px; left:54px; width:50px; height:50px;}
 .dragElement:nth-last-child(-n+2) {display:none;}
+#fileAccess > div:nth-child(2){position:relative; overflow:hidden; margin:10px auto; width:200px; height:50px; line-height:50px; background:#ccc;}
+#fileAccess > div:nth-child(2):hover{background:#eee !important; transition:0.4s}
+#fileAccess input{opacity:0; outline:none; position:absolute; top:0; right:0; min-width:100%; min-height:100%; cursor:inherit; display:block;}
+#fileAccess b{word-wrap:break-word;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px), screen and (max-height:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
@@ -160,6 +164,14 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
           Initial page visibility was <b id="foreDetect">unknown</b>.</div>
         <div id="foreDetectLog1"></div>
         <div id="foreDetectLog2"></div><small>Based on demo from  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API">MDN</a>.</small>
+      </div>
+      <div id="fileAccess">
+        <div>File Access</div>
+        <div>Choose some files 
+          <input type="file" onchange="handleFiles(this.files)" multiple>
+        </div>
+        <div>Number of selected files: <b id="fileCount">N/A</b></div>
+        <ul id="fileLog"></ul>
       </div>
       <div id="permission">
         <div>Permissions</div>
@@ -298,6 +310,7 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       <script type="text/javascript" src="./js/fullscreen.js"></script>
       <script type="text/javascript" src="./js/ScreenOrientationLock.js"></script>
       <script type="text/javascript" src="./js/touchGestures.js"></script>
+      <script type="text/javascript" src="./js/fileAccess.js"></script>
     </main>
   </body>
 </html>
