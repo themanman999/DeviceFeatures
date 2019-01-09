@@ -44,7 +44,7 @@
     <meta name="viewport" content="width=device-width" initial-scale="1" shrink-to-fit="no">
     <meta charset="UTF-8">
     <link rel="manifest" href="manifest.json">
-    <script type="text/javascript" src="./vibration.js"></script>
+    <script type="text/javascript" src="./js/vibration.js"></script>
     <style>body, #title, #onlineStatus{margin: 0 auto;}
 div,{height: 50px;}
 main > div{width:500px; margin:10px auto; padding:5px; border:1px solid; border-radius:5px;}
@@ -238,8 +238,8 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       </div>
       <div id="vibration"> 
         <div>Vibration</div>
-        <div class="btn" onclick="vibrateSimple()">Vibrate for 200 ms</div>
-        <div class="btn" onclick="vibratePattern()">Vibrate with pattern</div>
+        <button onclick="vibrateSimple()">Vibrate for 200 ms</button>
+        <button onclick="vibratePattern()">Vibrate with pattern</button>
       </div>
       <div id="geolocation"> 
         <div>Geolocation
@@ -283,21 +283,21 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
         <div class="container" id="logoContainer"><img id="imgLogo" src="./images/Retro-Block-Exclamation-icon.png" alt="HTML5"/></div>
       </div>
       <div id="footer"><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank" rel="noopener">HTML5 Rocks</a> article.</small></div>
-      <script type="text/javascript" src="./networkState.js"></script>
-      <script type="text/javascript" src="./networkSpeed.js"></script>
-      <script type="text/javascript" src="./batteryStatus.js"></script>
-      <script type="text/javascript" src="./deviceMemory.js"></script>
-      <script type="text/javascript" src="./geolocation.js"></script>
-      <script type="text/javascript" src="./devicePosition.js"></script>
-      <script type="text/javascript" src="./deviceMotion.js"></script>
-      <script type="text/javascript" src="./storageQuotas.js"></script>
-      <script type="text/javascript" src="./localNotification.js"></script>
-      <script type="text/javascript" src="./permissions.js"></script>
-      <script type="text/javascript" src="./foregroundDetection.js"></script>
-      <script type="text/javascript" src="./payment.js"></script>
-      <script type="text/javascript" src="./fullscreen.js"></script>
-      <script type="text/javascript" src="./ScreenOrientationLock.js"></script>
-      <script type="text/javascript" src="./touchGestures.js"></script>
+      <script type="text/javascript" src="./js/networkState.js"></script>
+      <script type="text/javascript" src="./js/networkSpeed.js"></script>
+      <script type="text/javascript" src="./js/batteryStatus.js"></script>
+      <script type="text/javascript" src="./js/deviceMemory.js"></script>
+      <script type="text/javascript" src="./js/geolocation.js"></script>
+      <script type="text/javascript" src="./js/devicePosition.js"></script>
+      <script type="text/javascript" src="./js/deviceMotion.js"></script>
+      <script type="text/javascript" src="./js/storageQuotas.js"></script>
+      <script type="text/javascript" src="./js/localNotification.js"></script>
+      <script type="text/javascript" src="./js/permissions.js"></script>
+      <script type="text/javascript" src="./js/foregroundDetection.js"></script>
+      <script type="text/javascript" src="./js/payment.js"></script>
+      <script type="text/javascript" src="./js/fullscreen.js"></script>
+      <script type="text/javascript" src="./js/ScreenOrientationLock.js"></script>
+      <script type="text/javascript" src="./js/touchGestures.js"></script>
     </main>
   </body>
 </html>

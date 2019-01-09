@@ -27,7 +27,7 @@ html(lang='en')
 	head
 		title Device Fearture
 		include meta
-		script(type='text/javascript' src='./vibration.js')
+		script(type='text/javascript' src='./js/vibration.js')
 		style
 			include style.css
 		script
@@ -166,8 +166,8 @@ html(lang='en')
 					button(onclick="persistentNotification()") Persistent notification
 			#vibration 
 				div Vibration
-				.btn(onclick='vibrateSimple()') Vibrate for 200 ms
-				.btn(onclick='vibratePattern()') Vibrate with pattern
+				button(onclick='vibrateSimple()') Vibrate for 200 ms
+				button(onclick='vibratePattern()') Vibrate with pattern
 			#geolocation 
 				div Geolocation
 					button#getGeolocation Ask for location
@@ -176,18 +176,18 @@ html(lang='en')
 				small Demo from 
 					a(href='https://www.html5rocks.com/en/tutorials/device/orientation/', target='_blank', rel='noopener') HTML5 Rocks
 					|  article.
-			script(type='text/javascript' src='./networkState.js')
-			script(type='text/javascript' src='./networkSpeed.js')
-			script(type='text/javascript' src='./batteryStatus.js')
-			script(type='text/javascript' src='./deviceMemory.js')
-			script(type='text/javascript' src='./geolocation.js')
-			script(type='text/javascript' src='./devicePosition.js')
-			script(type='text/javascript' src='./deviceMotion.js')
-			script(type='text/javascript' src='./storageQuotas.js')
-			script(type='text/javascript' src='./localNotification.js')
-			script(type='text/javascript' src='./permissions.js')
-			script(type='text/javascript' src='./foregroundDetection.js')
-			script(type='text/javascript' src='./payment.js')
-			script(type='text/javascript' src='./fullscreen.js')
-			script(type='text/javascript' src='./ScreenOrientationLock.js')
-			script(type='text/javascript' src='./touchGestures.js')
+			script(type='text/javascript' src='./js/networkState.js')
+			script(type='text/javascript' src='./js/networkSpeed.js')
+			script(type='text/javascript' src='./js/batteryStatus.js')
+			script(type='text/javascript' src='./js/deviceMemory.js')
+			script(type='text/javascript' src='./js/geolocation.js')
+			script(type='text/javascript' src='./js/devicePosition.js')
+			script(type='text/javascript' src='./js/deviceMotion.js')
+			script(type='text/javascript' src='./js/storageQuotas.js')
+			script(type='text/javascript' src='./js/localNotification.js')
+			script(type='text/javascript' src='./js/permissions.js')
+			script(type='text/javascript' src='./js/foregroundDetection.js')
+			script(type='text/javascript' src='./js/payment.js')
+			script(type='text/javascript' src='./js/fullscreen.js')
+			script(type='text/javascript' src='./js/ScreenOrientationLock.js')
+			script(type='text/javascript' src='./js/touchGestures.js')
