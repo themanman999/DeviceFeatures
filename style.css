@@ -20,14 +20,15 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #exitFull{display:none;}
 #geolocation button{display:block; margin:0 auto;}
 #deviceImage {margin:10px auto; border:1px solid black; border-radius:10px;}
-#deviceImage:after {content:'A'; font:80px serif; display:block; text-align:center;}
+#deviceImage:after {content:'A'; font:80px serif; display:block; text-align:center; height: inherit; line-height:2;}
 #unlock {display:none;}
 #touchGestures > div:nth-child(2){position:relative; height:260px;}
 .dragElement {height:100px; background-image:url(./images/fire.gif); background-size:contain; width:60px; height:45px; z-index:5; position:absolute; top:137px; left:84px; color:white; text-align:center; -ms-touch-action:none;}
-.dragElement:nth-child(2) {background-image:url(./images/NES_Bowser_5.png); background-size:contain;top:122px; left:246px;}
+.dragElement:nth-child(2) {background-image:url(./images/NES_Bowser_5.png); background-size:contain; top:122px; left:246px; width:125px; height:125px;}
 .dragElement:nth-child(3) {background-image:url(./images/mario8bit320x320.png); background-size:contain;top:48px; left:54px; width:50px; height:50px;}
+.dragElement:nth-last-child(-n+2) {display:none;}
 #footer{padding:0; line-height:25px;}
-@media screen and (max-width:600px){
+@media screen and (max-width:600px), screen and (max-height:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
 	#vibration,#DeviceMotion{border: 1px solid; border-radius: 5px;}
 	#vibration,#DeviceMotion,#touchGestures{display:block !important;}
@@ -42,4 +43,17 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 	#vibration div:not(:nth-child(1)){width:36% !important; font-size:small !important;}
 	#localNotifications button{width:33% !important; line-height:25px;}
 	#localNotifications button:nth-child(1){width:50% !important;}
+}
+@media screen and (orientation:portrait){
+	.dragElement{top:137px; left:84px;}
+	.dragElement:nth-child(2){top:122px; left:246px;}
+	.dragElement:nth-child(3){top:48px; left:54px;}
+}
+@media screen and (orientation:landscape){
+	.dragElement{top:123px; left:82px;}
+	.dragElement:nth-child(2){top:58px; left:518px;}
+	.dragElement:nth-child(3){top:34px; left:158px;}
+	.dragElement:nth-child(4){display:block !important; top:158px; left:252px;}
+	.dragElement:nth-child(5){display:block !important; top:72px; left:358px;}
+	#deviceImage:after {line-height:inherit;}
 }
