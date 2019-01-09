@@ -8,21 +8,29 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #title div{font-size:medium; font-weight:bold}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
-#payment button{background:#ccc; border:0; }
+#payment button{background:#ccc; border:0; box-shadow:none;}
 #payment button:hover{background:#eee;transition:0.4s}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
-#vibration,#DeviceMotion{display:none;}
+#vibration,#DeviceMotion,#touchGestures{display:none;}
 #localNotifications button{margin:0 10px 15px;}
 #permission button{border:0; line-height:25px; box-shadow:none; padding:0; border-radius:0;}
 #fullscreen button{margin-bottom:10px;}
 #box{width:90px; height:40px; line-height:40px; background-color:green; color:white; text-align:center; display:inline-block; border-radius:5px;}
 #exitFull{display:none;}
 #geolocation button{display:block; margin:0 auto;}
+#deviceImage {margin:10px auto; border:1px solid black; border-radius:10px;}
+#deviceImage:after {content:'A'; font:80px serif; display:block; text-align:center;}
+#unlock {display:none;}
+#touchGestures > div:nth-child(2){position:relative; height:260px;}
+.dragElement {height:100px; background-image:url(./images/fire.gif); background-size:contain; width:60px; height:45px; z-index:5; position:absolute; top:137px; left:84px; color:white; text-align:center; -ms-touch-action:none;}
+.dragElement:nth-child(2) {background-image:url(./images/NES_Bowser_5.png); background-size:contain;top:122px; left:246px;}
+.dragElement:nth-child(3) {background-image:url(./images/mario8bit320x320.png); background-size:contain;top:48px; left:54px; width:50px; height:50px;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
-	#vibration,#DeviceMotion{display:block !important; border: 1px solid; border-radius: 5px;}
+	#vibration,#DeviceMotion{border: 1px solid; border-radius: 5px;}
+	#vibration,#DeviceMotion,#touchGestures{display:block !important;}
 	#vibration div{width:38% !important; display:inline-block;}
 	#vibration div:nth-child(1){width:100% !important; text-align:center;}
 	#DeviceMotion > div{display:-webkit-box;}

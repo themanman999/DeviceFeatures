@@ -21,7 +21,7 @@ mixin deviceMotion
 				div= deviceArray[i][0]
 				div(id=deviceArray[i][1])
 		.container#logoContainer
-			img#imgLogo(src='./images/mario8bit320x320.png', alt='HTML5')
+			img#imgLogo(src='./images/Retro-Block-Exclamation-icon.png', alt='HTML5')
 doctype
 html(lang='en')
 	head
@@ -119,6 +119,15 @@ html(lang='en')
 						b#magnetometer-status unknown
 						|.		
 					#permissionLog
+			#touchGestures
+				div Touch Gestures
+				div
+					.dragElement
+					.dragElement
+					.dragElement
+				small Based on demo from
+					a(href='https://www.quirksmode.org/m/tests/drag2.html') QuirksMode.org
+					|.
 			#screenLockOrientation 
 				div Screen Lock & Orientation
 				div
@@ -179,3 +188,4 @@ html(lang='en')
 			script(type='text/javascript' src='./payment.js')
 			script(type='text/javascript' src='./fullscreen.js')
 			script(type='text/javascript' src='./ScreenOrientationLock.js')
+			script(type='text/javascript' src='./touchGestures.js')
