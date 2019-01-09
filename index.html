@@ -55,7 +55,7 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #title div{font-size:medium; font-weight:bold}
 #geolocation div, #localNotifications div, #localNotifications button{width:auto !important;}
 #localNotifications button,#batteryStatus div{height:auto;}
-#payment button{background:#ccc; border:0; }
+#payment button{background:#ccc; border:0; box-shadow:none;}
 #payment button:hover{background:#eee;transition:0.4s}
 .container{perspective:300; -webkit-perspective:300;}
 #imgLogo{ width:275px; margin-left:auto; margin-right:auto; display:block; padding:15px;}
@@ -167,6 +167,18 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
           <div id="permissionLog"></div>
         </div>
       </div>
+      <div id="screenLockOrientation"> 
+        <div>Screen Lock & Orientation</div>
+        <div>
+          <div id="deviceImage"></div>
+          <div>Current screen orientation is <b id="orientationType">unknown</b>.</div>
+        </div>
+        <div>
+          <button id="lock">Lock in current orientation</button>
+          <button id="unlock">Release the lock</button>
+        </div>
+        <div id="screenLockLog"></div>
+      </div>
       <div id="fullscreen">
         <div>Full Screen</div>
         <div>
@@ -252,6 +264,7 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       <script type="text/javascript" src="./foregroundDetection.js"></script>
       <script type="text/javascript" src="./payment.js"></script>
       <script type="text/javascript" src="./fullscreen.js"></script>
+      <script type="text/javascript" src="./ScreenOrientationLock.js"></script>
     </main>
   </body>
 </html>

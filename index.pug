@@ -119,6 +119,17 @@ html(lang='en')
 						b#magnetometer-status unknown
 						|.		
 					#permissionLog
+			#screenLockOrientation 
+				div Screen Lock & Orientation
+				div
+					#deviceImage
+					div Current screen orientation is 
+						b#orientationType unknown
+						|.
+				div
+					button#lock Lock in current orientation
+					button#unlock Release the lock
+				#screenLockLog
 			#fullscreen
 				div Full Screen
 				div
@@ -167,3 +178,4 @@ html(lang='en')
 			script(type='text/javascript' src='./foregroundDetection.js')
 			script(type='text/javascript' src='./payment.js')
 			script(type='text/javascript' src='./fullscreen.js')
+			script(type='text/javascript' src='./ScreenOrientationLock.js')
