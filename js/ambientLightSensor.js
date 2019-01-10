@@ -12,11 +12,11 @@ if (window.AmbientLightSensor){
           if (sensor.illuminance < 50) {
             document.body.className = 'darkLight';
             details[1].innerHTML = 'Dark Light';
-            document.getElementById('mediaContainer').classList.remove('darkLight');
+            document.getElementById('mediaContainer').classList.add('darkLight')
           } else {
             document.body.className = 'brightLight';
             details[1].innerHTML = 'Bright Light';
-            document.getElementById('mediaContainer').classList.add('darkLight');
+            document.getElementById('mediaContainer').classList.remove('darkLight')
           }
       }
 
