@@ -32,7 +32,7 @@ html(lang='en')
 			include style.css
 		script
 			include swScript.js
-	body
+	body.brightLight
 		main
 			#title
 				div This is what HTML5 can do on mobile device
@@ -85,6 +85,17 @@ html(lang='en')
 				small Based on demo from  
 					a(href='https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API') MDN
 					|.
+			#ambientLightSensor
+				div Ambient Light Sensor
+				.ligntSensorLog
+				.ligntSensorLog
+			#fileAccess
+				div File Access
+				div Choose some files 
+					input(type='file', onchange='handleFiles(this.files)' multiple)
+				div Number of selected files: 
+					b#fileCount N/A
+				ul#fileLog
 			#permission
 				div Permissions
 				div
@@ -191,3 +202,5 @@ html(lang='en')
 			script(type='text/javascript' src='./js/fullscreen.js')
 			script(type='text/javascript' src='./js/ScreenOrientationLock.js')
 			script(type='text/javascript' src='./js/touchGestures.js')
+			script(type='text/javascript' src='./js/fileAccess.js')
+			script(type='text/javascript' src='./js/ambientLightSensor.js')

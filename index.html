@@ -78,6 +78,8 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #fileAccess > div:nth-child(2):hover{background:#eee !important; transition:0.4s}
 #fileAccess input{opacity:0; outline:none; position:absolute; top:0; right:0; min-width:100%; min-height:100%; cursor:inherit; display:block;}
 #fileAccess b{word-wrap:break-word;}
+.brightLight{background:white; color:black !important;}
+.darkLight{background:black; color:red !important;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px), screen and (max-height:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
@@ -127,7 +129,7 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 }
     </script>
   </head>
-  <body>
+  <body class="brightLight">
     <main>
       <div id="title">
         <div>This is what HTML5 can do on mobile device</div>
@@ -164,6 +166,11 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
           Initial page visibility was <b id="foreDetect">unknown</b>.</div>
         <div id="foreDetectLog1"></div>
         <div id="foreDetectLog2"></div><small>Based on demo from  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API">MDN</a>.</small>
+      </div>
+      <div id="ambientLightSensor">
+        <div>Ambient Light Sensor</div>
+        <div class="ligntSensorLog"></div>
+        <div class="ligntSensorLog"></div>
       </div>
       <div id="fileAccess">
         <div>File Access</div>
@@ -311,6 +318,7 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       <script type="text/javascript" src="./js/ScreenOrientationLock.js"></script>
       <script type="text/javascript" src="./js/touchGestures.js"></script>
       <script type="text/javascript" src="./js/fileAccess.js"></script>
+      <script type="text/javascript" src="./js/ambientLightSensor.js"></script>
     </main>
   </body>
 </html>

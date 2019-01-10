@@ -31,6 +31,8 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #fileAccess > div:nth-child(2):hover{background:#eee !important; transition:0.4s}
 #fileAccess input{opacity:0; outline:none; position:absolute; top:0; right:0; min-width:100%; min-height:100%; cursor:inherit; display:block;}
 #fileAccess b{word-wrap:break-word;}
+.brightLight{background:white; color:black !important;}
+.darkLight{background:black; color:red !important;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px), screen and (max-height:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
