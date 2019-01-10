@@ -81,6 +81,11 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 #fileAccess b{word-wrap:break-word;}
 .brightLight{background:white; color:black !important;}
 .darkLight{background:black; color:red !important;}
+#mediaContainer{display:grid; grid-template-columns:1fr 1fr 1fr; margin:10px;}
+.mediaBtn{width:50px; height:50px; border:5px solid black; border-radius:50%; margin:0 auto; background-image:url(./images/camera.png); background-size:cover; overflow:hidden;}
+.mediaBtn:nth-child(2){background-image:url(./images/mic.png)}
+.mediaBtn:nth-child(3){background-image:url(./images/recorder.png)}
+.mediaBtn input{width:100%; height:100%; opacity:0;}
 #footer{padding:0; line-height:25px;}
 @media screen and (max-width:600px), screen and (max-height:600px){
 	main > div{width: auto; height: auto !important; margin:15px !important; padding: 10px 5px;}
@@ -175,9 +180,17 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       </div>
       <div id="mediaCapture">
         <div>Media Capture</div>
-        <input type="file" accept="image/*" id="capture" capture="camera"><img id="frame">
-        <input type="file" accept="audio/*" id="capture" capture="microphone">
-        <input type="file" accept="video/*" id="capture" capture="camcoder">
+        <div id="mediaContainer">
+          <div class="mediaBtn">
+            <input type="file" accept="image/*" id="capture" capture="camera">
+          </div>
+          <div class="mediaBtn">
+            <input type="file" accept="audio/*" id="capture" capture="microphone">
+          </div>
+          <div class="mediaBtn">
+            <input type="file" accept="video/*" id="capture" capture="camcoder">
+          </div>
+        </div>
       </div>
       <div id="fileAccess">
         <div>File Access</div>

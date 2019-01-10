@@ -92,10 +92,13 @@ html(lang='en')
 				.ligntSensorLog
 			#mediaCapture
 				div Media Capture
-				input(type='file',accept='image/*',id='capture',capture='camera')
-				img#frame
-				input(type='file',accept='audio/*',id='capture',capture='microphone')
-				input(type='file',accept='video/*',id='capture',capture='camcoder')
+				div#mediaContainer
+					.mediaBtn
+						input(type='file',accept='image/*',id='capture',capture='camera')
+					.mediaBtn
+						input(type='file',accept='audio/*',id='capture',capture='microphone')
+					.mediaBtn
+						input(type='file',accept='video/*',id='capture',capture='camcoder')
 			#fileAccess
 				div File Access
 				div Choose some files 
