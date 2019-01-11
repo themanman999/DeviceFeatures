@@ -77,7 +77,6 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 .dragElement:nth-child(2) {background:url(./images/mario8BitSsprite.png) -18px -1395px no-repeat; top:122px; left:246px; width:75px; height:70px;}
 .dragElement:nth-child(3) {background:url(./images/mario8BitSsprite.png) -246px -894px no-repeat; top:48px; left:54px; width:50px; height:50px;}
 .dragElement:nth-last-child(-n+2) {display:none;}
-#fileAccess > div:nth-child(2){position:relative; overflow:hidden; margin:10px auto; width:200px; height:50px; line-height:50px; background:#ccc;}
 #fileAccess > div:nth-child(2):hover{background:#eee !important; transition:0.4s}
 #fileAccess input{opacity:0; outline:none; position:absolute; top:0; right:0; min-width:100%; min-height:100%; cursor:inherit; display:block;}
 #fileAccess b{word-wrap:break-word;}
@@ -202,7 +201,8 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
       </div>
       <div id="fileAccess">
         <div>File Access</div>
-        <div>Choose some files 
+        <div class="mediaBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 1024 1280" version="1.1" x="0px" y="0px"><path fill="#000000" d="M603.52 944.64c-17.92 0-32-14.08-32-32v-168.96c0-53.76 44.16-97.92 97.92-97.92H780.8V220.16c0-21.76-17.92-39.04-39.04-39.04H288.64c-21.76 0-39.04 17.92-39.04 39.04v620.8c0 21.76 17.92 39.04 39.04 39.04h158.08c17.92 0 32 14.08 32 32s-14.08 32-32 32H288.64c-56.96 0-103.04-46.08-103.04-103.04v-620.8c0-56.96 46.08-103.04 103.04-103.04h453.12c56.96 0 103.04 46.08 103.04 103.04v457.6c0 17.92-14.08 32-32 32h-143.36c-18.56 0-33.92 15.36-33.92 33.92v168.96c0 17.28-14.08 32-32 32z"/><path fill="#000000" d="M603.52 944.64c-4.48 0-8.96-0.64-13.44-3.2-11.52-5.12-18.56-16.64-18.56-28.8v-168.96c0-53.76 44.16-97.92 97.92-97.92H812.8c17.92 0 32 14.08 32 32s-14.08 32-32 32h-143.36c-18.56 0-33.92 15.36-33.92 33.92v98.56l101.76-87.68c13.44-11.52 33.28-10.24 45.44 3.2 11.52 13.44 10.24 33.28-3.2 45.44l-154.24 133.76c-6.4 5.12-14.08 7.68-21.76 7.68zM683.52 359.68H360.32c-17.92 0-32-14.08-32-32s14.08-32 32-32h323.2c17.92 0 32 14.08 32 32s-14.72 32-32 32zM683.52 563.2H360.32c-17.92 0-32-14.08-32-32s14.08-32 32-32h323.2c17.92 0 32 14.08 32 32s-14.72 32-32 32zM483.84 766.72H360.32c-17.92 0-32-14.08-32-32s14.08-32 32-32h123.52c17.92 0 32 14.08 32 32s-14.08 32-32 32z"/></svg>
           <input type="file" onchange="handleFiles(this.files)" multiple>
         </div>
         <div>Number of selected files: <b id="fileCount">N/A</b></div>

@@ -29,7 +29,6 @@ button{background:#ccc; box-shadow:2px 2px; border:1px solid; border-radius:5px;
 .dragElement:nth-child(2) {background:url(./images/mario8BitSsprite.png) -18px -1395px no-repeat; top:122px; left:246px; width:75px; height:70px;}
 .dragElement:nth-child(3) {background:url(./images/mario8BitSsprite.png) -246px -894px no-repeat; top:48px; left:54px; width:50px; height:50px;}
 .dragElement:nth-last-child(-n+2) {display:none;}
-#fileAccess > div:nth-child(2){position:relative; overflow:hidden; margin:10px auto; width:200px; height:50px; line-height:50px; background:#ccc;}
 #fileAccess > div:nth-child(2):hover{background:#eee !important; transition:0.4s}
 #fileAccess input{opacity:0; outline:none; position:absolute; top:0; right:0; min-width:100%; min-height:100%; cursor:inherit; display:block;}
 #fileAccess b{word-wrap:break-word;}

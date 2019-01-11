@@ -108,7 +108,9 @@ html(lang='en')
 						input(type='file',accept='video/*',id='capture',capture='camcoder')
 			#fileAccess
 				div File Access
-				div Choose some files 
+				.mediaBtn
+					|
+					include ./images/file.svg
 					input(type='file', onchange='handleFiles(this.files)' multiple)
 				div Number of selected files: 
 					b#fileCount N/A
